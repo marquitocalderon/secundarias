@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Custom fonts for this template-->
+    <link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/public/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <%- include('listaadmin') %>
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <%- include('navbar') %>
+                        <!-- End of Topbar -->
+
+                        <!-- ********* ESCRIBIR AQUI DENTRO CONTAINER FLUILD ESCRIBE LO QUE SALDRA EN EL MEDIO-->
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col-12" style="margin-bottom: 1em;">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        REGISTRAR USUARIOS
+                                    </button>
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar
+                                                        Usuarios</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="registroUsuario">
+                                                        <div class="form-group">
+                                                            <label for="nombre">Nombre:</label>
+                                                            <input type="text" class="form-control" id="nombre"
+                                                                name="nombre" required>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="usuario">Usuario:</label>
+                                                            <input type="text" class="form-control" id="usuario"
+                                                                name="usuario" required>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="password">Password:</label>
+                                                            <input type="password" class="form-control" id="password"
+                                                                name="password" required>
+                                                        </div>
+
+                                     
+
+                                                        <div class="form-group">
+                                                            <input type="hidden" class="form-control"
+                                                                id="estado_usuario" value="1" name="estado_usuario">
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Registrar</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Docente</th>
+                                                    <th>CURSO</th>
+                                                    <th>GRADO</th>
+                                                    <th>SECCION</th>
+                                                    <th>COLEGIO</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% asignacionDocente.forEach(asignacion => {
+                                                    if ( asignacion.colegio.nombre_colegio === colegio) { %>
+                                                      <tr>
+                                                          <td>
+                                                              <%= asignacion.docente.nombre %>
+                                                          </td>
+                                                          <td>
+                                                              <%= asignacion.materia.nombre %>
+                                                          </td>
+                                                          <td>
+                                                              <%= asignacion.grado.nombre %>
+                                                          </td>
+                                                          <td>
+                                                            <%= asignacion.seccion.nombre %>
+                                                        </td>
+                                                          <td>
+                                                            <%= asignacion.colegio.nombre_colegio %> - <%= asignacion.colegio.distrito.nombre_distrito %>
+                                                        </td>
+                                                        <td>
+                                                          <button>actualizar</button>
+                                                        </td>
+                                                      </tr>
+                                                  <% } }); %>                                                  
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="modalacutalizacionusuarios">
+                                        <!-- Modal de actualización -->
+                                        <div class="modal fade" id="exampleModalActualizacion" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Actualizar
+                                                            Usuario</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- Aquí puedes agregar los campos de actualización del usuario -->
+                                                        <form id="ActualizarUsuarioForm">
+                                                            <div class="form-group">
+
+                                                                <input type="hidden" class="form-control"
+                                                                    id="idusuario">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="nombre">Nombre:</label>
+                                                                <input type="text" class="form-control" id="nombre2">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="usuario">Usuario:</label>
+                                                                <input type="text" class="form-control" id="usuario2">
+                                                            </div>
+
+                                                            <div class="form-group">
+
+                                                                <input type="hidden" class="form-control"
+                                                                    id="password2">
+                                                            </div>
+
+                                              
+
+                                                            <div class="form-group">
+                                                                <input type="hidden" class="form-control"
+                                                                    id="estado_usuario2" value="1"
+                                                                    name="estado_usuario">
+                                                            </div>
+                                                            <button type="submit"
+                                                                class="btn btn-primary">Actualizar</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.container-fluid -->
+
+
+                        <!-- ACA VA IR EL POST Y EL PUT Y EL DELETE -->
+                        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                        <script>
+                            document.getElementById('registroUsuario').addEventListener('submit', function (event) {
+                                event.preventDefault();
+
+                                var nombredelRol = document.getElementById('nombre').value;
+                                var usuario = document.getElementById('usuario').value;
+                                var password = document.getElementById('password').value;
+                                var roles = document.getElementById('rol2').value;
+                                var estado = document.getElementById('estado_usuario').value;
+
+                                var enviarlosDatos = {
+
+                                    nombre: nombredelRol,
+                                    usuario: usuario,
+                                    password: password,
+                                    id_rol: roles,
+                                    estado_user: estado
+                                };
+
+                                // Realizar la solicitud POST utilizando Axios
+                                axios.post('/admin/usuarios', enviarlosDatos)
+                                    .then(function (response) {
+                                        // Mostrar una notificación SweetAlert exitosa
+                                        Swal.fire({
+                                            title: 'Éxito',
+                                            text: 'Se Registro Correctamente',
+                                            icon: 'success'
+                                        }).then(function () {
+                                            // Recargar la página después de cerrar la notificación
+                                            location.reload();
+                                        });
+                                    })
+                                    .catch(function (error) {
+                                        // Mostrar una notificación SweetAlert de error
+                                        Swal.fire({
+                                            title: 'Error',
+                                            text: 'Ocurrió un error al registrar',
+                                            icon: 'error'
+                                        });
+                                    });
+                            });
+                        </script>
+
+                        <script>
+                            function cargarDatosUsuario(id, nombre, usuario, password, rol, estado) {
+                                // Asignar los valores de los campos en el modal con los datos capturados por ID
+                                document.getElementById('idusuario').value = id;
+                                document.getElementById('nombre2').value = nombre;
+                                document.getElementById('usuario2').value = usuario;
+                                document.getElementById('password2').value = password;
+                                document.getElementById('roles').value = rol;
+                                document.getElementById('estado_usuario2').value = estado;
+                            }
+
+                            document.getElementById('ActualizarUsuarioForm').addEventListener('submit', function (event) {
+                                event.preventDefault();
+
+                                var idusuario = document.getElementById('idusuario').value;
+                                var nombreusuario = document.getElementById('nombre2').value;
+                                var usuario = document.getElementById('usuario2').value;
+                                var password = document.getElementById('password2').value;
+                                var rolusuario = document.getElementById('roles').value;
+                                var estado = document.getElementById('estado_usuario2').value;
+
+                                const datosParaActualizar = {
+                                    idusuario: idusuario,
+                                    nombre: nombreusuario,
+                                    usuario: usuario,
+                                    password: password,
+                                    roles: {
+                                        idrol: rolusuario
+                                    },
+                                    estado_usuario: estado
+                                };
+                                // Realizar la solicitud POST utilizando Axios
+                                axios.put('http://ie.spring.informaticapp.com:8383/admin/usuarios', datosParaActualizar)
+                                    .then(function (response) {
+                                        // Mostrar una notificación SweetAlert exitosa
+                                        Swal.fire({
+                                            title: 'Éxito',
+                                            text: 'Se Actualizo Correctamente',
+                                            icon: 'success'
+                                        }).then(function () {
+                                            // Recargar la página después de cerrar la notificación
+                                            location.reload();
+                                        });
+                                    })
+                                    .catch(function (error) {
+                                        // Mostrar una notificación SweetAlert de error
+                                        Swal.fire({
+                                            title: 'Error',
+                                            text: 'Ocurrió un error al Actualizar',
+                                            icon: 'error'
+                                        });
+                                    });
+
+
+                            })
+                        </script>
+
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Boostrap 5</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/public/vendor/jquery/jquery.min.js"></script>
+    <script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/public/js/sb-admin-2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

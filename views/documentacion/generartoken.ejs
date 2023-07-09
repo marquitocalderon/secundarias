@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>API-SECUNDARIA-TOKEN</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/public/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+  <div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-5 d-none d-lg-block">
+            <img style="margin-left: 50px;" src="/public/img/token.webp" alt="tokensecundaria" class="img-fluid">
+          </div>
+          <div class="col-lg-7" style="display: flex; justify-content: center; align-items: center;">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Solicita tu Acceso</h1>
+              </div>
+              <form class="user" id="generartoken">
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="nombre" placeholder="Nombres">
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-user" id="apellidos" placeholder="Apellidos">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control form-control-user" id="email"
+                    placeholder="Correo Electronico">
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="hidden" class="form-control form-control-user" id="cliente_id" value=""
+                      placeholder="cliente_id">
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="hidden" class="form-control form-control-user" id="llave_secreta" value=""
+                      placeholder="llave_secreta">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="hidden" value="1" class="form-control form-control-user" id="estado"
+                    placeholder=" estado">
+                </div>
+                <button type="submit" class="btn btn-primary btn-user btn-block">
+                  Solicitar
+                </button>
+              </form>
+              <hr>
+              <div class="text-center">
+                <a class="small" href="/documentacion"> Ver Documentacion |</a>
+                <a class="small" href="/login">Volver al Login</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 text-center">
+          <p id="resultadoUsuario"></p>
+          <p id="resultadoClave"></p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    document.getElementById('generartoken').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      var nombresToken = document.getElementById('nombre').value;
+      var apellidosToken = document.getElementById('apellidos').value;
+      var emailToken = document.getElementById('email').value;
+      var clienteToken = document.getElementById('cliente_id').value;
+      var llaveToken = document.getElementById('llave_secreta').value;
+      var estadoToken = document.getElementById('estado').value;
+
+      var enviarlosDatos = {
+
+        nombres: nombresToken,
+        apellidos: apellidosToken,
+        email: emailToken,
+        cliente_id: clienteToken,
+        llave_secreta: llaveToken,
+        estado: estadoToken
+      };
+
+      // Realizar la solicitud POST utilizando Axios
+      axios.post('http://ie.spring.informaticapp.com:8383/admin/token', enviarlosDatos)
+        .then(function (response) {
+          // Mostrar una notificación SweetAlert exitosa
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Se Solicito Correctamente su TOKEN',
+            icon: 'success'
+          }).then(function () {
+
+            document.getElementById("generartoken").reset();
+            document.getElementById('resultadoUsuario').innerHTML = 'Usuario: <strong>' + response.data.cliente_id + '</strong>';
+            document.getElementById('resultadoClave').innerHTML = 'Llave secreta: <strong>' + response.data.llave_secreta + '</strong>';
+
+          });
+        })
+        .catch(function (error) {
+          // Mostrar una notificación SweetAlert de error
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al registrar',
+            icon: 'error'
+          });
+        });
+    });
+  </script>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/public/vendor/jquery/jquery.min.js"></script>
+  <script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/public/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
