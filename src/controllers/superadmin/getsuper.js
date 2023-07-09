@@ -145,7 +145,47 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
 
   const vistasuperRegistrarCursos = async (req, res) => {
  
-    res.render("superadmin/cursos"); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
+    try {
+      const userId = req.userId;
+      const roles2 = req.userroles;
+      const colegio = req.userColegio;
+      const distrito = req.userDistrito;
+      
+      const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/materias");
+      const materias = response.data; // Suponiendo que la respuesta contiene los datos 
+
+           
+      const responseAlumno = await axios.get("http://ie.spring.informaticapp.com:8383/admin/alumnos");
+      const alumnos = responseAlumno.data; 
+
+      const responseColegios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
+      const colegios = responseColegios.data; // Suponiendo que la respuesta contiene los datos de los usuarios
+  
+      res.render("superadmin/cursos", { materias , colegio , userId, roles2 , colegios , distrito , alumnos}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
+  
+    } catch (error) {
+      console.error(error);
+      res.render("superadmin/cursos"); // Renderiza una vista de error en caso de que ocurra un problema con la solicitud
+    }
+  };
+
+
+  const vistasupergrados = async (req, res) => {
+ 
+    try {
+      const userId = req.userId;
+      const roles2 = req.userroles;
+      const colegio = req.userColegio;
+      const distrito = req.userDistrito;
+      
+      const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/grados");
+      const grados = response.data; // Suponiendo que la respuesta contiene los datos 
+      res.render("superadmin/grados", {grados, colegio , userId, roles2 , distrito}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
+  
+    } catch (error) {
+      console.error(error);
+      res.render("superadmin/grados"); // Renderiza una vista de error en caso de que ocurra un problema con la solicitud
+    }
   };
 
 
@@ -154,5 +194,5 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
 
 
 
-module.exports = { vistasuper , vistaSuperRegistrarUsuario , vistaSuperRegistrarRoles , vistaSuperRegistrarColegios , vistaSuperRegistrarAlumnos , vistaSuperRegistrarDocentes , vistaSuperRegistrarAsignacion , vistasuperRegistrarCursos
+module.exports = { vistasuper , vistaSuperRegistrarUsuario , vistaSuperRegistrarRoles , vistaSuperRegistrarColegios , vistaSuperRegistrarAlumnos , vistaSuperRegistrarDocentes , vistaSuperRegistrarAsignacion , vistasuperRegistrarCursos , vistasupergrados
 };

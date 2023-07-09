@@ -48,10 +48,7 @@
 
                             <div class="row">
                                 <div class="col-12" style="margin-bottom: 1em;">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">
-                                        REGISTRAR ALUMNOS
-                                    </button>
+
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -59,7 +56,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar
-                                                        Alumnos</h1>
+                                                        Usuarios</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
@@ -83,7 +80,9 @@
                                                                 name="password" required>
                                                         </div>
 
-                                     
+                                   
+
+                                             
 
                                                         <div class="form-group">
                                                             <input type="hidden" class="form-control"
@@ -101,27 +100,21 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Nombre</th>
-                                                    <th>COLEGIO</th>
-                                                    <th>Acciones</th>
+                                                    <th>ID</th>
+                                                    <th>Grados</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% materias.forEach(materia => {
-                                                    if ( materia.colegio.nombre_colegio === colegio) { %>
-                                                      <tr>
-                                                          <td>
-                                                              <%= materia.nombre %>
-                                                          </td>
+                                                <% grados.forEach(grado=> { %>
+                                                    <tr>
+                                                      <td>
+                                                        <%= grado.id_grado %>
+                                                    </td> 
                                                         <td>
-                                                            <%= colegio %> - <%= distrito %> 
-                                                        </td>
-                                                        <td>
-                                                          <button>Actualizar</button>
-                                                      </td>
-                                                        
-                                                      </tr>
-                                                  <% } }); %>                                                  
+                                                            <%= grado.nombre %>
+                                                        </td>                                       
+                                                    </tr>
+                                                    <% }); %>                                                 
                                             </tbody>
                                         </table>
                                     </div>
@@ -161,7 +154,6 @@
                                                                     id="password2">
                                                             </div>
 
-                                              
 
                                                             <div class="form-group">
                                                                 <input type="hidden" class="form-control"
@@ -191,23 +183,25 @@
                             document.getElementById('registroUsuario').addEventListener('submit', function (event) {
                                 event.preventDefault();
 
-                                var nombredelRol = document.getElementById('nombre').value;
+                                var nombreUsuario = document.getElementById('nombre').value;
                                 var usuario = document.getElementById('usuario').value;
                                 var password = document.getElementById('password').value;
                                 var roles = document.getElementById('rol2').value;
+                                var colegio = document.getElementById('colegio2').value;
                                 var estado = document.getElementById('estado_usuario').value;
 
                                 var enviarlosDatos = {
 
-                                    nombre: nombredelRol,
+                                    nombre: nombreUsuario,
                                     usuario: usuario,
                                     password: password,
-                                    id_rol: roles,
+                                    rol: roles,
+                                    colegioUsuario: colegio,
                                     estado_user: estado
                                 };
 
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.post('/admin/usuarios', enviarlosDatos)
+                                axios.post('/super/usuarios', enviarlosDatos)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({
@@ -231,13 +225,14 @@
                         </script>
 
                         <script>
-                            function cargarDatosUsuario(id, nombre, usuario, password, rol, estado) {
+                            function cargarDatosUsuario(id, nombre, usuario, password, rol, colegio, estado) {
                                 // Asignar los valores de los campos en el modal con los datos capturados por ID
                                 document.getElementById('idusuario').value = id;
                                 document.getElementById('nombre2').value = nombre;
                                 document.getElementById('usuario2').value = usuario;
                                 document.getElementById('password2').value = password;
                                 document.getElementById('roles').value = rol;
+                                document.getElementById('colegio').value = colegio;
                                 document.getElementById('estado_usuario2').value = estado;
                             }
 
@@ -249,15 +244,19 @@
                                 var usuario = document.getElementById('usuario2').value;
                                 var password = document.getElementById('password2').value;
                                 var rolusuario = document.getElementById('roles').value;
+                                var colegioUsuario = document.getElementById('colegio').value;
                                 var estado = document.getElementById('estado_usuario2').value;
 
                                 const datosParaActualizar = {
-                                    idusuario: idusuario,
+                                    id_usuario: idusuario,
                                     nombre: nombreusuario,
                                     usuario: usuario,
                                     password: password,
                                     roles: {
-                                        idrol: rolusuario
+                                        id_rol: rolusuario
+                                    },
+                                    colegio: {
+                                        id_colegio: colegioUsuario
                                     },
                                     estado_usuario: estado
                                 };

@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const session = require("express-session");
 const { vistaDocente, vistaDocenteAsignacionCursoAlumno } = require("../controllers/Docente/getdocente");
 const { vistaAdmin, vistaRegistrarUsuario, vistaRegistrarAlumnos } = require("../controllers/admin/getadmin");
-const { vistasuper, vistaSuperRegistrarUsuario, vistaSuperRegistrarRoles, vistaSuperRegistrarColegios, vistaSuperRegistrarAlumnos, vistaSuperRegistrarDocentes, vistaSuperRegistrarAsignacion, vistasuperRegistrarCursos } = require("../controllers/superadmin/getsuper");
+const { vistasuper, vistaSuperRegistrarUsuario, vistaSuperRegistrarRoles, vistaSuperRegistrarColegios, vistaSuperRegistrarAlumnos, vistaSuperRegistrarDocentes, vistaSuperRegistrarAsignacion, vistasuperRegistrarCursos, vistasupergrados } = require("../controllers/superadmin/getsuper");
 const { vistaDocumentacion, vistaDocumentacionUusuarios, vistaToken, vistaDocumentacionRoles } = require("../controllers/rutadocumentacion");
 const { postUsuarios } = require("../controllers/superadmin/postsuperadmin");
 
@@ -135,12 +135,15 @@ router.post("/login", async (req, res) => {
 router.get("/super", protectRoute, vistasuper);
 router.get("/super/usuarios", protectRoute, vistaSuperRegistrarUsuario);
 router.get("/super/roles", protectRoute, vistaSuperRegistrarRoles);
+
 router.post("/super/usuarios", postUsuarios);
+
 router.get("/super/colegios", protectRoute, vistaSuperRegistrarColegios);
 router.get("/super/alumnos", protectRoute, vistaSuperRegistrarAlumnos);
 router.get("/super/docentes", protectRoute, vistaSuperRegistrarDocentes);
 router.get("/super/asignaciones", protectRoute, vistaSuperRegistrarAsignacion);
-
+router.get("/super/materias", protectRoute, vistasuperRegistrarCursos);
+router.get("/super/grados", protectRoute, vistasupergrados);
 
 
 
@@ -161,7 +164,7 @@ router.get("/docente/alumnos", protectRoute, vistaDocenteAsignacionCursoAlumno);
 router.get("/admin", protectRoute, vistaAdmin);
 router.get("/admin/usuarios", protectRoute, vistaRegistrarUsuario);
 router.get("/admin/alumnos", protectRoute, vistaRegistrarAlumnos);
-router.get("/admin/materias", vistasuperRegistrarCursos);
+
 
 
 
