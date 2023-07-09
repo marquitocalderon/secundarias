@@ -151,7 +151,7 @@
                 };
 
                 // Realizar la solicitud POST utilizando Axios
-                axios.post('http://localhost:8383/admin/roles', enviarlosDatos)
+                axios.post('http://ie.spring.informaticapp.com:8383/admin/roles', enviarlosDatos)
                   .then(function (response) {
                     // Mostrar una notificación SweetAlert exitosa
                     Swal.fire({
@@ -193,7 +193,7 @@
                   estado_rol: "1"
                 };
                 // Realizar la solicitud POST utilizando Axios
-                axios.put('http://localhost:8383/admin/roles', datosParaActualizar)
+                axios.put('http://ie.spring.informaticapp.com:8383/admin/roles', datosParaActualizar)
                   .then(function (response) {
                     // Mostrar una notificación SweetAlert exitosa
                     Swal.fire({

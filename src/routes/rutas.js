@@ -73,7 +73,7 @@ router.post("/login", async (req, res) => {
 
   try {
     // Obtener los usuarios de la API http://localhost:9100/admin/usuarios
-    const response = await axios.get("http://localhost:8383/admin/usuarios");
+    const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/usuarios");
     const usuarios = response.data;
 
     // Buscar el usuario por nombre de usuario

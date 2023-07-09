@@ -10,7 +10,7 @@ const postUsuarios = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Realizar solicitud POST para crear el usuario
-    const response = await axios.post('http://localhost:8383/admin/usuarios', {
+    const response = await axios.post('http://ie.spring.informaticapp.com:8383/admin/usuarios', {
       nombre,
       usuario,
       password: hashedPassword,

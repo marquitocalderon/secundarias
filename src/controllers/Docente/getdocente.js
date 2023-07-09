@@ -19,14 +19,14 @@ const vistaDocenteAsignacionCursoAlumno = async (req, res) => {
         const distrito = req.userDistrito;
         const correo = req.userCorreo;
         
-        const response = await axios.get("http://localhost:8383/admin/asignacion");
+        const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/asignacion");
         const asignacionDocente = response.data; // Suponiendo que la respuesta contiene los datos 
   
              
-        const responseAlumno = await axios.get("http://localhost:8383/admin/alumnos");
+        const responseAlumno = await axios.get("http://ie.spring.informaticapp.com:8383/admin/alumnos");
         const alumnos = responseAlumno.data; 
   
-        const responseColegios = await axios.get("http://localhost:8383/admin/colegios");
+        const responseColegios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
         const colegios = responseColegios.data; // Suponiendo que la respuesta contiene los datos de los usuarios
         
 

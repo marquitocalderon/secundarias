@@ -19,10 +19,10 @@ const vistaRegistrarUsuario = async (req, res) => {
         const colegio = req.userColegio;
 
         
-        const responseRoles = await axios.get("http://localhost:8383/admin/roles");
+        const responseRoles = await axios.get("http://ie.spring.informaticapp.com:8383/admin/roles");
         const roles = responseRoles.data; // Suponiendo que la respuesta contiene los datos de los roles
 
-        const responseUsuarios = await axios.get("http://localhost:8383/admin/usuarios");
+        const responseUsuarios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/usuarios");
         const usuarios = responseUsuarios.data; // Suponiendo que la respuesta contiene los datos de los usuarios
     
         res.render("admin/registrarusuario", { roles, usuarios, colegio,  userId , roles2  }); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
@@ -65,13 +65,13 @@ const vistaRegistrarMatricula = async (req, res) => {
       const roles2 = req.userroles;
 
       
-      const responseAlumno = await axios.get("http://localhost:8383/admin/roles");
+      const responseAlumno = await axios.get("http://ie.spring.informaticapp.com:8383/admin/roles");
       const alumno = responseAlumno.data; // Suponiendo que la respuesta contiene los datos de los roles
 
-      const responseperiodo = await axios.get("http://localhost:8383/admin/roles");
+      const responseperiodo = await axios.get("http://ie.spring.informaticapp.com:8383/admin/roles");
       const periodo = responseperiodo.data; 
       
-      const responsematriculas = await axios.get("http://localhost:8383/admin/roles");
+      const responsematriculas = await axios.get("http://ie.spring.informaticapp.com:8383/admin/roles");
       const matriculas = responsematriculas.data; // Suponiendo que la respuesta contiene los datos de los usuarios
   
       res.render("admin/registrarmatricula", { alumno, periodo, matriculas,  userId , roles2  }); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
@@ -90,10 +90,10 @@ const vistaRegistrarAlumnos = async (req, res) => {
       const colegio = req.userColegio;
       const distrito = req.userDistrito;
       
-      const responseAlumno = await axios.get("http://localhost:8383/admin/alumnos");
+      const responseAlumno = await axios.get("http://ie.spring.informaticapp.com:8383/admin/alumnos");
       const alumnos = responseAlumno.data; // Suponiendo que la respuesta contiene los datos de los roles
 
-      const responseColegios = await axios.get("http://localhost:8383/admin/colegios");
+      const responseColegios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
       const colegios = responseColegios.data; // Suponiendo que la respuesta contiene los datos de los usuarios
   
       res.render("admin/registraralumnos", { alumnos , colegio , userId, roles2 , colegios , distrito}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
