@@ -6,7 +6,7 @@ const session = require("express-session");
 const { vistaDocente, vistaDocenteAsignacionCursoAlumno } = require("../controllers/Docente/getdocente");
 const { vistaAdmin, vistaRegistrarUsuario, vistaRegistrarAlumnos } = require("../controllers/admin/getadmin");
 const { vistasuper, vistaSuperRegistrarUsuario, vistaSuperRegistrarRoles, vistaSuperRegistrarColegios, vistaSuperRegistrarAlumnos, vistaSuperRegistrarDocentes, vistaSuperRegistrarAsignacion, vistasuperRegistrarCursos, vistasupergrados, vistasuperRegistrarPeriodos, vistaRegistrarDepartamentos, vistaRegistrarProvincias, vistaRegistrarDistritos, vistaRegistrarMatricula } = require("../controllers/superadmin/getsuper");
-const { vistaDocumentacion, vistaDocumentacionUusuarios, vistaToken, vistaDocumentacionRoles } = require("../controllers/rutadocumentacion");
+const { vistaDocumentacion, vistaDocumentacionUusuarios, vistaToken, vistaDocumentacionRoles, vistaDocumentacionDepartamentos, vistaDocumentacionProvincia, vistaDocumentacionDistrito, vistaDocumentacionColegio, vistaDocumentacionAlumno, vistaDocumentacionGrado, vistaDocumentacionSecciones, vistaDocumentacionMatricula, vistaDocumentacionDocente, vistaDocumentacionAsignaciones, vistaDocumentacionCursos, vistaDocumentacionNotas, vistaDocumentacionPeriodo } = require("../controllers/rutadocumentacion");
 const { postUsuarios } = require("../controllers/superadmin/postsuperadmin");
 
 
@@ -185,7 +185,19 @@ router.get("/documentacion/usuarios", vistaDocumentacionUusuarios);
 router.get("/tokensecundaria", vistaToken);
 
 router.get("/documentacion/roles", vistaDocumentacionRoles);
-
+router.get("/documentacion/departamentos", vistaDocumentacionDepartamentos);
+router.get("/documentacion/provincia", vistaDocumentacionProvincia);
+router.get("/documentacion/distrito", vistaDocumentacionDistrito);
+router.get("/documentacion/colegio", vistaDocumentacionColegio);
+router.get("/documentacion/alumno", vistaDocumentacionAlumno);
+router.get("/documentacion/grado", vistaDocumentacionGrado);
+router.get("/documentacion/secciones", vistaDocumentacionSecciones);
+router.get("/documentacion/matricula", vistaDocumentacionMatricula);
+router.get("/documentacion/docente", vistaDocumentacionDocente);
+router.get("/documentacion/asignaciones", vistaDocumentacionAsignaciones);
+router.get("/documentacion/cursos", vistaDocumentacionCursos);
+router.get("/documentacion/notas", vistaDocumentacionNotas);
+router.get("/documentacion/periodo", vistaDocumentacionPeriodo);
 
 
 
