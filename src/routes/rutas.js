@@ -122,7 +122,7 @@ router.post("/login", async (req, res) => {
         res.render("login", { mensaje: "La contraseña es incorrecta" });
       }
     } else {
-      res.render("login", { mensaje: "Este usuario no existe" });
+      res.render("login", { mensaje: "Este usuario no existe"  });
     }
   } catch (error) {
     console.error("Error al obtener los usuarios:", error);

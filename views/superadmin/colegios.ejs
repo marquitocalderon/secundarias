@@ -96,19 +96,20 @@
 
                                                         <div class="form-group">
                                                             <label for="rol">tipo_institucion:</label>
-                                                            <select class="form-select" id="tipo_institucion" name="tipo_institucion">
-                                                                    <option value="Publica">
-                                                                       Publica
-                                                                    </option>
-                                                                    <option value="Privada">
-                                                                        Privada
-                                                                     </option>
+                                                            <select class="form-select" id="tipo_institucion"
+                                                                name="tipo_institucion">
+                                                                <option value="Publica">
+                                                                    Publica
+                                                                </option>
+                                                                <option value="Privada">
+                                                                    Privada
+                                                                </option>
                                                             </select>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <input type="hidden" class="form-control"
-                                                                id="estado" value="1" name="estado">
+                                                            <input type="hidden" class="form-control" id="estado"
+                                                                value="1" name="estado">
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Registrar</button>
                                                     </form>
@@ -141,28 +142,45 @@
                                                             <%= colegio.nombre_colegio %>
                                                         </td>
                                                         <td>
-                                                            <%= colegio.distrito.nombre_distrito %> , <%= colegio.distrito.provincia.nombre_provincia %>, <%= colegio.distrito.provincia.departamento.nombre_departamento %>
+                                                            <%= colegio.distrito.nombre_distrito %> , <%=
+                                                                    colegio.distrito.provincia.nombre_provincia %>, <%=
+                                                                        colegio.distrito.provincia.departamento.nombre_departamento
+                                                                        %>
                                                         </td>
                                                         <td>
-                                                          <%= colegio.direccion %>
-                                                      </td>
-                                                      <td>
-                                                        <%= colegio.telefono %>
-                                                    </td>
-                                                    <td>
-                                                      <%= colegio.tipo_institucion %>
-                                                  </td>
-                                              <td>
-                                                <button>actualizar</button>
-                                              </td>
-                                       
+                                                            <%= colegio.direccion %>
+                                                        </td>
+                                                        <td>
+                                                            <%= colegio.telefono %>
+                                                        </td>
+                                                        <td>
+                                                            <%= colegio.tipo_institucion %>
+                                                        </td>
+
+                                                        <td>
+                                                            <button type="button" class="btn btn-success"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModalActualizacion" onclick="cargarDatos('<%=colegio.id_colegio %>', 
+                                                        '<%=colegio.nombre_colegio %>',
+                                                        '<%=colegio.distrito.id_distrito %>',
+                                                        '<%=colegio.direccion %>',
+                                                        '<%=colegio.telefono %>',
+                                                        '<%=colegio.tipo_institucion %>',
+                                                        '<%=colegio.estado %>',
+                                                        
+                                                        
+                                                        )" title="Actualizar">
+                                                                <i class="bi bi-arrow-up-right-square-fill"></i>
+                                                            </button>
+                                                        </td>
+
                                                     </tr>
-                                                    <% }); %>                                                 
+                                                    <% }); %>
                                             </tbody>
                                         </table>
                                     </div>
 
-                                    <div class="modalacutalizacionusuarios">
+                                    <div class="modalacutalizacion">
                                         <!-- Modal de actualización -->
                                         <div class="modal fade" id="exampleModalActualizacion" tabindex="-1"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -176,32 +194,55 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <!-- Aquí puedes agregar los campos de actualización del usuario -->
-                                                        <form id="ActualizarUsuarioForm">
+                                                        <form id="ActualizarColegios">
                                                             <div class="form-group">
-
-                                                                <input type="hidden" class="form-control"
-                                                                    id="idusuario">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="nombre">Nombre:</label>
-                                                                <input type="text" class="form-control" id="nombre2">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="usuario">Usuario:</label>
-                                                                <input type="text" class="form-control" id="usuario2">
+                                                                <label for="nombre">nombre_colegio:</label>
+                                                                <input type="hidden" class="form-control" id="id_colegio"
+                                                                    name="id_colegio" required>
+                                                                <input type="text" class="form-control" id="nombre2"
+                                                                    name="nombre" required>
                                                             </div>
 
                                                             <div class="form-group">
-
-                                                                <input type="hidden" class="form-control"
-                                                                    id="password2">
+                                                                <label for="rol">distrito:</label>
+                                                                <select class="form-select" id="distrito2"
+                                                                    name="distrito">
+                                                                    <% vistadistritos.forEach(function(distrito) { %>
+                                                                        <option value="<%= distrito.id_distrito %>">
+                                                                            <%= distrito.nombre_distrito %>
+                                                                        </option>
+                                                                        <% }); %>
+                                                                </select>
                                                             </div>
 
+                                                            <div class="form-group">
+                                                                <label for="direccion">direccion:</label>
+                                                                <input type="text" class="form-control" id="direccion2"
+                                                                    name="direccion" required>
+                                                            </div>
 
                                                             <div class="form-group">
-                                                                <input type="hidden" class="form-control"
-                                                                    id="estado_usuario2" value="1"
-                                                                    name="estado_usuario">
+                                                                <label for="telefono">telefono:</label>
+                                                                <input type="text" class="form-control" id="telefono2"
+                                                                    name="telefono" required>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="rol">tipo_institucion:</label>
+                                                                <select class="form-select" id="tipo_institucion2"
+                                                                    name="tipo_institucion">
+                                                                    <option value="Publica">
+                                                                        Publica
+                                                                    </option>
+                                                                    <option value="Privada">
+                                                                        Privada
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <input type="hidden" class="form-control" id="estado2"
+                                                                    value="1" name="estado">
                                                             </div>
                                                             <button type="submit"
                                                                 class="btn btn-primary">Actualizar</button>
@@ -236,8 +277,8 @@
                                 var enviarlosDatos = {
 
                                     nombre_colegio: nombreColegio,
-                                    distrito : {
-                                        id_distrito : distrito
+                                    distrito: {
+                                        id_distrito: distrito
                                     },
                                     direccion: direccion,
                                     telefono: telefono,
@@ -270,43 +311,41 @@
                         </script>
 
                         <script>
-                            function cargarDatosUsuario(id, nombre, usuario, password, rol, colegio, estado) {
+                            function cargarDatos(id, nombre, distrito, direccion, telefono, tipo_institucion, estado) {
                                 // Asignar los valores de los campos en el modal con los datos capturados por ID
-                                document.getElementById('idusuario').value = id;
+                                document.getElementById('id_colegio').value = id;
                                 document.getElementById('nombre2').value = nombre;
-                                document.getElementById('usuario2').value = usuario;
-                                document.getElementById('password2').value = password;
-                                document.getElementById('roles').value = rol;
-                                document.getElementById('colegio').value = colegio;
-                                document.getElementById('estado_usuario2').value = estado;
+                                document.getElementById('distrito2').value = distrito;
+                                document.getElementById('direccion2').value = direccion;
+                                document.getElementById('telefono2').value = telefono;
+                                document.getElementById('tipo_institucion2').value = tipo_institucion;
+                                document.getElementById('estado2').value = estado;
                             }
 
-                            document.getElementById('ActualizarUsuarioForm').addEventListener('submit', function (event) {
+                            document.getElementById('ActualizarColegios').addEventListener('submit', function (event) {
                                 event.preventDefault();
 
-                                var idusuario = document.getElementById('idusuario').value;
-                                var nombreusuario = document.getElementById('nombre2').value;
-                                var usuario = document.getElementById('usuario2').value;
-                                var password = document.getElementById('password2').value;
-                                var rolusuario = document.getElementById('roles').value;
-                                var colegioUsuario = document.getElementById('colegio').value;
-                                var estado = document.getElementById('estado_usuario2').value;
+                                var idcolegio = document.getElementById('id_colegio').value;
+                                var nombrecolegio = document.getElementById('nombre2').value;
+                                var distrito = document.getElementById('distrito2').value;
+                                var direccion = document.getElementById('direccion2').value;
+                                var telefono = document.getElementById('telefono2').value;
+                                var tipo_institucion = document.getElementById('tipo_institucion2').value;
+                                var estado = document.getElementById('estado2').value;
 
-                                const datosParaActualizar = {
-                                    id_usuario: idusuario,
-                                    nombre: nombreusuario,
-                                    usuario: usuario,
-                                    password: password,
-                                    roles: {
-                                        id_rol: rolusuario
+                                var datosParaActualizar = {
+                                    id_colegio: idcolegio,
+                                    nombre_colegio: nombrecolegio,
+                                    distrito: {
+                                        id_distrito: distrito
                                     },
-                                    colegio: {
-                                        id_colegio: colegioUsuario
-                                    },
-                                    estado_usuario: estado
+                                    direccion: direccion,
+                                    telefono: telefono,
+                                    tipo_institucion: tipo_institucion,
+                                    estado: estado
                                 };
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.put('http://ie.spring.informaticapp.com:8383/admin/usuarios', datosParaActualizar)
+                                axios.put('http://ie.spring.informaticapp.com:8383/admin/colegios', datosParaActualizar)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({

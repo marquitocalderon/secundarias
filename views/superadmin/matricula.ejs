@@ -81,19 +81,19 @@
                         <div class="col-lg-4 col-md-6">
                           <div class="form-group">
                             <label for="nombre">Fecha Matricula:</label>
-                            <input type="date" class="form-control" id="nombre" name="nombre" required>
+                            <input type="date" class="form-control" id="fecha_matricula" name="fecha_matricula" required>
                           </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                           <div class="form-group">
                             <label for="nombre">Monto:</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            <input type="text" class="form-control" id="monto" name="monto" required>
                           </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                           <div class="form-group">
                             <label for="nombre">Apoderado:</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            <input type="text" class="form-control" id="apoderado" name="apoderado" required>
                           </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
@@ -329,13 +329,26 @@
               document.getElementById('registro').addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                var nombrecurso = document.getElementById('nombre').value;
+                var idalumno = document.getElementById('idalumno').value;
+                var periodo = document.getElementById('periodo').value;
+                var fecha_matricula = document.getElementById('fecha_matricula').value;
+                var monto = document.getElementById('monto').value;
+                var apoderado = document.getElementById('apoderado').value;
                 var colegio = document.getElementById('colegio').value;
                 var estado = document.getElementById('estado').value;
 
+
                 var enviarlosDatos = {
 
-                  nombre: nombrecurso,
+                  alumno:{
+                    id_estudiante: idalumno,
+                  },
+                  periodo:{
+                    id_periodo: periodo,
+                  },
+                  fecha_matricula: fecha_matricula,
+                  monto: monto,
+                  apoderado: apoderado,
                   estado: estado,
                   colegio: {
                     id_colegio: colegio
@@ -343,7 +356,7 @@
                 };
 
                 // Realizar la solicitud POST utilizando Axios
-                axios.post('http://ie.spring.informaticapp.com:8383/admin/materias', enviarlosDatos)
+                axios.post('http://ie.spring.informaticapp.com:8383/admin/matricula', enviarlosDatos)
                   .then(function (response) {
                     // Mostrar una notificación SweetAlert exitosa
                     Swal.fire({

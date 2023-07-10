@@ -99,7 +99,8 @@
                                                             <select class="form-select" id="colegio2" name="colegio">
                                                                 <% colegiosGet.forEach(function(colegio) { %>
                                                                     <option value="<%= colegio.id_colegio %>">
-                                                                        <%= colegio.nombre_colegio %> -  <%= colegio.distrito.nombre_distrito %> 
+                                                                        <%= colegio.nombre_colegio %> - <%=
+                                                                                colegio.distrito.nombre_distrito %>
                                                                     </option>
                                                                     <% }); %>
                                                             </select>
@@ -149,7 +150,11 @@
                                                             <%= usuario.colegio.nombre_colegio %>
                                                         </td>
                                                         <td>
-                                                            <%= usuario.colegio.distrito.nombre_distrito %> , <%= usuario.colegio.distrito.provincia.nombre_provincia %>, <%= usuario.colegio.distrito.provincia.departamento.nombre_departamento %>
+                                                            <%= usuario.colegio.distrito.nombre_distrito %> , <%=
+                                                                    usuario.colegio.distrito.provincia.nombre_provincia
+                                                                    %>, <%=
+                                                                        usuario.colegio.distrito.provincia.departamento.nombre_departamento
+                                                                        %>
                                                         </td>
                                                         <td>
                                                             <button type="button" class="btn btn-success"
@@ -159,9 +164,16 @@
                                                                 title="Actualizar">
                                                                 <i class="bi bi-arrow-up-right-square-fill"></i>
                                                             </button>
+
+                                                            <button type="button" class="btn btn-danger"
+                                                                onclick="confirmarEliminacion('<%= usuario.id_usuario %>','<%= usuario.estado_usuario %>')"
+                                                                title="Eliminar">
+                                                                Eliminar
+                                                            </button>
                                                         </td>
+
                                                     </tr>
-                                                    <% }); %>                                                 
+                                                    <% }); %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -219,7 +231,8 @@
                                                                     required>
                                                                     <% colegiosGet.forEach(function(colegio) { %>
                                                                         <option value="<%= colegio.id_colegio %>">
-                                                                            <%= colegio.nombre_colegio %> -  <%= colegio.distrito.nombre_distrito %> 
+                                                                            <%= colegio.nombre_colegio %> - <%=
+                                                                                    colegio.distrito.nombre_distrito %>
                                                                         </option>
                                                                         <% }); %>
                                                                 </select>
@@ -354,6 +367,40 @@
 
 
                             })
+                        </script>
+
+                        <script>
+                            function confirmarEliminacion(id) {
+                                Swal.fire({
+                                    title: 'Confirmar eliminación',
+                                    text: '¿Estás seguro de que deseas eliminar este elemento?',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Eliminar',
+                                    cancelButtonText: 'Cancelar'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Realizar solicitud DELETE con Axios
+                                        axios.delete('http://ie.spring.informaticapp.com:11122/admin/usuarios/' + id)
+                                            .then(response => {
+                                                // Redireccionar u realizar cualquier acción adicional después de eliminar
+                                                location.reload();
+                                            })
+                                            .catch(error => {
+                                                console.error(error);
+                                                // Mostrar mensaje de error si la solicitud falla
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'Error',
+                                                    text: 'No se pudo eliminar el elemento.'
+                                                });
+                                            });
+                                    }
+                                });
+                            }
+
                         </script>
 
                 </div>

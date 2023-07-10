@@ -70,6 +70,7 @@
                           <th>ID</th>
                           <th>Departamento</th>
                           <th>Estado</th>
+                          <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -84,48 +85,51 @@
                             <td>
                               <%= departamentos.estado %>
                             </td>
+                            <td>
+                              <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#exampleActualizar"
+                                onclick="cargarDatos('<%= departamentos.id_departamento %>', '<%= departamentos.nombre_departamento %>','<%= departamentos.estado %>' )"
+                                title="Actualizar">
+                                <i class="bi bi-arrow-up-right-square-fill"></i>
+                              </button>
+
+                              <button type="button" class="btn btn-danger"
+                                onclick="confirmarEliminacion('<%= departamentos.id_departamento %>')" title="Eliminar">
+                                Eliminar
+                              </button>
+                            </td>
                           </tr>
                           <% }); %>
                       </tbody>
                     </table>
                   </div>
 
-                  <div class="modalacutalizacionusuarios">
+                  <div class="modalacutalizacion">
                     <!-- Modal de actualización -->
-                    <div class="modal fade" id="exampleModalActualizacion" tabindex="-1"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleActualizar" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Actualizar
-                              Usuario</h5>
+                              Departamento</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                            <!-- Aquí puedes agregar los campos de actualización del usuario -->
-                            <form id="ActualizarUsuarioForm">
+                            <!-- Aquí puedes agregar los campos de actualización del departamentos -->
+                            <form id="actualizacionDepartamentos">
                               <div class="form-group">
-
-                                <input type="hidden" class="form-control" id="idusuario">
+                                <label for="nombre">ID Departamento:</label>
+                                <input type="text" class="form-control" id="idDepartamento1" name="idDepartamento1"
+                                  placeholder="Ingrese el nombre del departamento">
                               </div>
                               <div class="form-group">
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre2">
+                                <label for="nombre">Departamento:</label>
+                                <input type="text" class="form-control" id="Departamento1" name="Departamento1"
+                                  placeholder="Ingrese el nombre del departamento">
                               </div>
                               <div class="form-group">
-                                <label for="usuario">Usuario:</label>
-                                <input type="text" class="form-control" id="usuario2">
-                              </div>
-
-                              <div class="form-group">
-
-                                <input type="hidden" class="form-control" id="password2">
-                              </div>
-
-
-                              <div class="form-group">
-                                <input type="hidden" class="form-control" id="estado_usuario2" value="1"
-                                  name="estado_usuario">
+                                <input type="hidden" class="form-control" id="estado1" value="1" name="estado1">
                               </div>
                               <button type="submit" class="btn btn-primary">Actualizar</button>
                             </form>
@@ -180,34 +184,29 @@
                   });
               });
             </script>
-
+            <!-- ESTO ES EL PUT SU SCRYPT -->
             <script>
-              function cargarDatos(id, provincia, departamento, estado) {
+              function cargarDatos(id, departamento, estado) {
                 // Asignar los valores de los campos en el modal con los datos capturados por ID
-                document.getElementById('IDProvincia2').value = id;
-                document.getElementById('Provincia2').value = provincia;
-                document.getElementById('departamento2').value = departamento;
-                document.getElementById('estado2').value = estado;
+                document.getElementById('idDepartamento1').value = id;
+                document.getElementById('Departamento1').value = departamento;
+                document.getElementById('estado1').value = estado;
               }
 
-              document.getElementById('actualizacionProvincias').addEventListener('submit', function (event) {
+              document.getElementById('actualizacionDepartamentos').addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                var idprovincia = document.getElementById('IDProvincia2').value;
-                var nombre_provincia = document.getElementById('Provincia2').value;
-                var departamento = document.getElementById('departamento2').value;
-                var estado = document.getElementById('estado2').value;
+                var iddepartamento = document.getElementById('idDepartamento1').value;
+                var nombre_provincia = document.getElementById('Departamento1').value;
+                var estado = document.getElementById('estado1').value;
 
                 const datosParaActualizar = {
-                  id_provincia: idprovincia,
-                  nombre_provincia: nombre_provincia,
-                  departamento: {
-                    id_departamento: departamento,
-                  },
+                  id_departamento: iddepartamento,
+                  nombre_departamento: nombre_provincia,
                   estado: estado
                 };
-                // Realizar la solicitud POST utilizando Axios
-                axios.put('http://ie.spring.informaticapp.com:8383/admin/provincias', datosParaActualizar)
+                // Realizar la solicitud PUST utilizando Axios
+                axios.put('http://ie.spring.informaticapp.com:8383/admin/departamentos', datosParaActualizar)
                   .then(function (response) {
                     // Mostrar una notificación SweetAlert exitosa
                     Swal.fire({
@@ -229,9 +228,9 @@
                   });
               })
             </script>
-
+            <!-- ESTO ES EL Delete SU SCRYPT -->
             <script>
-              function confirmarEliminacion(idProvincia) {
+              function confirmarEliminacion(idDepartamento) {
                 Swal.fire({
                   title: 'Confirmar eliminación',
                   text: '¿Estás seguro de que deseas eliminar este elemento?',
@@ -244,7 +243,7 @@
                 }).then((result) => {
                   if (result.isConfirmed) {
                     // Realizar solicitud DELETE con Axios
-                    axios.delete('http://ie.spring.informaticapp.com:8383/admin/provincias/' + idProvincia)
+                    axios.delete('http://ie.spring.informaticapp.com:8383/admin/departamentos/' + idDepartamento)
                       .then(response => {
                         // Redireccionar u realizar cualquier acción adicional después de eliminar
                         location.reload();
