@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const session = require("express-session");
 const { vistaDocente, vistaDocenteAsignacionCursoAlumno } = require("../controllers/Docente/getdocente");
 const { vistaAdmin, vistaRegistrarUsuario, vistaRegistrarAlumnos } = require("../controllers/admin/getadmin");
-const { vistasuper, vistaSuperRegistrarUsuario, vistaSuperRegistrarRoles, vistaSuperRegistrarColegios, vistaSuperRegistrarAlumnos, vistaSuperRegistrarDocentes, vistaSuperRegistrarAsignacion, vistasuperRegistrarCursos, vistasupergrados } = require("../controllers/superadmin/getsuper");
+const { vistasuper, vistaSuperRegistrarUsuario, vistaSuperRegistrarRoles, vistaSuperRegistrarColegios, vistaSuperRegistrarAlumnos, vistaSuperRegistrarDocentes, vistaSuperRegistrarAsignacion, vistasuperRegistrarCursos, vistasupergrados, vistasuperRegistrarPeriodos, vistaRegistrarDepartamentos, vistaRegistrarProvincias, vistaRegistrarDistritos } = require("../controllers/superadmin/getsuper");
 const { vistaDocumentacion, vistaDocumentacionUusuarios, vistaToken, vistaDocumentacionRoles } = require("../controllers/rutadocumentacion");
 const { postUsuarios } = require("../controllers/superadmin/postsuperadmin");
 
@@ -144,8 +144,11 @@ router.get("/super/docentes", protectRoute, vistaSuperRegistrarDocentes);
 router.get("/super/asignaciones", protectRoute, vistaSuperRegistrarAsignacion);
 router.get("/super/materias", protectRoute, vistasuperRegistrarCursos);
 router.get("/super/grados", protectRoute, vistasupergrados);
+router.get("/super/periodos", protectRoute, vistasuperRegistrarPeriodos);
 
-
+router.get("/super/departamentos", vistaRegistrarDepartamentos);
+router.get("/super/provincias", vistaRegistrarProvincias );
+router.get("/super/distritos", vistaRegistrarDistritos );
 
 
 
