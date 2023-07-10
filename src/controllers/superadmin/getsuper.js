@@ -61,9 +61,12 @@ const vistaSuperRegistrarColegios = async (req, res) => {
     const colegio = req.userColegio;
 
     const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
-    const vistacolegios = response.data; // Suponiendo que la respuesta contiene los datos de los roles
+    const vistacolegios = response.data;
+    
+    const responsedistritos = await axios.get("http://ie.spring.informaticapp.com:8383/admin/distritos");
+    const vistadistritos = responsedistritos.data;// Suponiendo que la respuesta contiene los datos de los roles
 
-    res.render("superadmin/colegios", { vistacolegios , userId, roles2 , colegio}); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
+    res.render("superadmin/colegios", { vistacolegios , vistadistritos,  userId, roles2 , colegio}); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
 
   } catch (error) {
     res.render("superadmin/colegios"); // Renderiza una vista de error en caso de que ocurra un problema con la solicitud
@@ -77,14 +80,22 @@ const vistaSuperRegistrarAlumnos = async (req, res) => {
       const roles2 = req.userroles;
       const colegio = req.userColegio;
       const distrito = req.userDistrito;
+      const idcolegio = req.userIdColegio;
       
       const responseAlumno = await axios.get("http://ie.spring.informaticapp.com:8383/admin/alumnos");
       const alumnos = responseAlumno.data; // Suponiendo que la respuesta contiene los datos de los roles
 
       const responseColegios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
-      const colegios = responseColegios.data; // Suponiendo que la respuesta contiene los datos de los usuarios
+      const colegios = responseColegios.data;
+      
+      const responseGrados = await axios.get("http://ie.spring.informaticapp.com:8383/admin/grados");
+      const grados = responseGrados.data;
+      
+      const responseSecciones = await axios.get("http://ie.spring.informaticapp.com:8383/admin/secciones");
+      const secciones = responseSecciones.data;
+
   
-      res.render("superadmin/registraralumnos", { alumnos , colegio , userId, roles2 , colegios , distrito}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
+      res.render("superadmin/registraralumnos", { alumnos , grados, secciones, colegio , userId, roles2 , colegios , distrito , idcolegio}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
   
     } catch (error) {
       console.error(error);
@@ -100,6 +111,7 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
       const roles2 = req.userroles;
       const colegio = req.userColegio;
       const distrito = req.userDistrito;
+      const idcolegio = req.userIdColegio;
       
       const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/docentes");
       const docentes = response.data; // Suponiendo que la respuesta contiene los datos de los roles
@@ -107,7 +119,7 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
       const responseColegios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
       const colegios = responseColegios.data; // Suponiendo que la respuesta contiene los datos de los usuarios
   
-      res.render("superadmin/docentes", { docentes , colegio , userId, roles2 , colegios , distrito}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
+      res.render("superadmin/docentes", { docentes , colegio , userId, roles2 , colegios , distrito , idcolegio}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
   
     } catch (error) {
       console.error(error);
@@ -123,18 +135,31 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
         const roles2 = req.userroles;
         const colegio = req.userColegio;
         const distrito = req.userDistrito;
+        const idcolegio = req.userIdColegio;
         
         const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/asignacion");
         const asignacionDocente = response.data; // Suponiendo que la respuesta contiene los datos 
   
-             
+
+        const responsed= await axios.get("http://ie.spring.informaticapp.com:8383/admin/docentes");
+      const docentes = responsed.data;
+
+        const responsemate = await axios.get("http://ie.spring.informaticapp.com:8383/admin/materias");
+        const materias = responsemate.data;
+        
+        const responsegrados = await axios.get("http://ie.spring.informaticapp.com:8383/admin/grados");
+        const grados = responsegrados.data;
+
+        const responseSecciones = await axios.get("http://ie.spring.informaticapp.com:8383/admin/secciones");
+        const secciones = responseSecciones.data;
+
         const responseAlumno = await axios.get("http://ie.spring.informaticapp.com:8383/admin/alumnos");
         const alumnos = responseAlumno.data; 
   
         const responseColegios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
         const colegios = responseColegios.data; // Suponiendo que la respuesta contiene los datos de los usuarios
     
-        res.render("superadmin/asignaciones", { asignacionDocente , colegio , userId, roles2 , colegios , distrito , alumnos}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
+        res.render("superadmin/asignaciones", { asignacionDocente , materias, grados, secciones, idcolegio, colegio , userId, roles2 , colegios , distrito , alumnos , docentes}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
     
       } catch (error) {
         console.error(error);
@@ -150,6 +175,7 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
       const roles2 = req.userroles;
       const colegio = req.userColegio;
       const distrito = req.userDistrito;
+      const idcolegio = req.userIdColegio;
       
       const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/materias");
       const materias = response.data; // Suponiendo que la respuesta contiene los datos 
@@ -161,7 +187,7 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
       const responseColegios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
       const colegios = responseColegios.data; // Suponiendo que la respuesta contiene los datos de los usuarios
   
-      res.render("superadmin/cursos", { materias , colegio , userId, roles2 , colegios , distrito , alumnos}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
+      res.render("superadmin/cursos", { materias , colegio , userId, roles2 , colegios , distrito , alumnos , idcolegio}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
   
     } catch (error) {
       console.error(error);
@@ -196,14 +222,14 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
       const roles2 = req.userroles;
       const colegio = req.userColegio;
       const distrito = req.userDistrito;
-      
+      const idcolegio = req.userIdColegio;
       const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/periodos");
       const periodos= response.data; // Suponiendo que la respuesta contiene los datos 
 
       const responseColegios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
       const colegios = responseColegios.data; // Suponiendo que la respuesta contiene los datos de los usuarios
   
-      res.render("superadmin/periodos", {periodos, colegio, colegios , distrito, roles2, userId}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
+      res.render("superadmin/periodos", {periodos, idcolegio, colegio, colegios , distrito, roles2, userId}); // Renderiza la vista "usuarios" pasando los datos de los roles y usuarios a través del objeto
   
     } catch (error) {
       console.error(error);

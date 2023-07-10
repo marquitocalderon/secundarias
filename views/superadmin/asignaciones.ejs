@@ -50,7 +50,7 @@
                                 <div class="col-12" style="margin-bottom: 1em;">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">
-                                        REGISTRAR USUARIOS
+                                        REGISTRAR ASIGNACIONES
                                     </button>
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -59,35 +59,66 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar
-                                                        Usuarios</h1>
+                                                        Asignaciones</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="registroUsuario">
+                                                    <form id="registroAsignacion">
                                                         <div class="form-group">
-                                                            <label for="nombre">Nombre:</label>
-                                                            <input type="text" class="form-control" id="nombre"
-                                                                name="nombre" required>
+                                                            <label for="rol">Docente:</label>
+                                                            <select class="form-select" id="docente" name="docente">
+                                                                <% docentes.forEach(docente=> {
+                                                                    if (docente.colegio.nombre_colegio === colegio) { %>
+                                                                    <option value="<%= docente.id_docente %>">
+                                                                        <%= docente.nombre %>
+                                                                    </option>
+                                                                    <% } }); %>
+                                                            </select>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="usuario">Usuario:</label>
-                                                            <input type="text" class="form-control" id="usuario"
-                                                                name="usuario" required>
+                                                            <label for="rol">Curso:</label>
+                                                            <select class="form-select" id="curso" name="curso">
+                                                                <% materias.forEach(curso=> {
+                                                                    if (curso.colegio.nombre_colegio === colegio) { %>
+                                                                    <option value="<%= curso.id_curso %>">
+                                                                        <%= curso.nombre %>
+                                                                    </option>
+                                                                    <% } }); %>
+                                                            </select>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="rol">Grado:</label>
+                                                            <select class="form-select" id="grado" name="grado">
+                                                                <% grados.forEach(function(grado) { %>
+                                                                    <option value="<%= grado.id_grado %>">
+                                                                        <%= grado.nombre %>
+                                                                    </option>
+                                                                    <% }); %>
+                                                            </select>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="password">Password:</label>
-                                                            <input type="password" class="form-control" id="password"
-                                                                name="password" required>
+                                                            <label for="rol">Seccion:</label>
+                                                            <select class="form-select" id="seccion" name="seccion">
+                                                                <% secciones.forEach(function(seccion) { %>
+                                                                    <option value="<%= seccion.id_seccion %>">
+                                                                        <%= seccion.nombre %>
+                                                                    </option>
+                                                                    <% }); %>
+                                                            </select>
                                                         </div>
 
-                                     
-
                                                         <div class="form-group">
-                                                            <input type="hidden" class="form-control"
-                                                                id="estado_usuario" value="1" name="estado_usuario">
+                                                            <label for="rol">Colegio:</label>
+                                                            <select class="form-select" id="colegio" name="colegio">
+                                                                <option value="<%= idcolegio %>">
+                                                                    <%= colegio %> - <%= distrito %>
+                                                                </option>
+                                                            </select>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Registrar</button>
                                                     </form>
@@ -110,29 +141,30 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% asignacionDocente.forEach(asignacion => {
+                                                <% asignacionDocente.forEach(asignacion=> {
                                                     if ( asignacion.colegio.nombre_colegio === colegio) { %>
-                                                      <tr>
-                                                          <td>
-                                                              <%= asignacion.docente.nombre %>
-                                                          </td>
-                                                          <td>
-                                                              <%= asignacion.materia.nombre %>
-                                                          </td>
-                                                          <td>
-                                                              <%= asignacion.grado.nombre %>
-                                                          </td>
-                                                          <td>
-                                                            <%= asignacion.seccion.nombre %>
-                                                        </td>
-                                                          <td>
-                                                            <%= asignacion.colegio.nombre_colegio %> - <%= asignacion.colegio.distrito.nombre_distrito %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= asignacion.docente.nombre %>
                                                         </td>
                                                         <td>
-                                                          <button>actualizar</button>
+                                                            <%= asignacion.materia.nombre %>
                                                         </td>
-                                                      </tr>
-                                                  <% } }); %>                                                  
+                                                        <td>
+                                                            <%= asignacion.grado.nombre %>
+                                                        </td>
+                                                        <td>
+                                                            <%= asignacion.seccion.nombre %>
+                                                        </td>
+                                                        <td>
+                                                            <%= asignacion.colegio.nombre_colegio %> - <%=
+                                                                    asignacion.colegio.distrito.nombre_distrito %>
+                                                        </td>
+                                                        <td>
+                                                            <button>actualizar</button>
+                                                        </td>
+                                                    </tr>
+                                                    <% } }); %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -172,7 +204,7 @@
                                                                     id="password2">
                                                             </div>
 
-                                              
+
 
                                                             <div class="form-group">
                                                                 <input type="hidden" class="form-control"
@@ -199,26 +231,36 @@
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                         <script>
-                            document.getElementById('registroUsuario').addEventListener('submit', function (event) {
+                            document.getElementById('registroAsignacion').addEventListener('submit', function (event) {
                                 event.preventDefault();
 
-                                var nombredelRol = document.getElementById('nombre').value;
-                                var usuario = document.getElementById('usuario').value;
-                                var password = document.getElementById('password').value;
-                                var roles = document.getElementById('rol2').value;
-                                var estado = document.getElementById('estado_usuario').value;
+                                var docente = document.getElementById('docente').value;
+                                var materia = document.getElementById('curso').value;
+                                var grado = document.getElementById('grado').value;
+                                var seccion = document.getElementById('seccion').value;
+                                var colegio = document.getElementById('colegio').value;
 
                                 var enviarlosDatos = {
 
-                                    nombre: nombredelRol,
-                                    usuario: usuario,
-                                    password: password,
-                                    id_rol: roles,
-                                    estado_user: estado
+                                    docente: {
+                                        id_docente: docente
+                                    },
+                                    materia: {
+                                        id_curso: materia
+                                    },
+                                    grado: {
+                                        id_grado: grado,
+                                    },
+                                    seccion: {
+                                        id_seccion: seccion,
+                                    },
+                                    colegio: {
+                                        id_colegio: colegio,
+                                    }
                                 };
 
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.post('/admin/usuarios', enviarlosDatos)
+                                axios.post('http://ie.spring.informaticapp.com:8383/admin/asignacion', enviarlosDatos)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({

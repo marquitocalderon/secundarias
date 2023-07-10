@@ -55,7 +55,7 @@
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
+                                        <div class="modal-dialog modal-xl">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar
@@ -64,32 +64,99 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="registroUsuario">
-                                                        <div class="form-group">
-                                                            <label for="nombre">Nombre:</label>
-                                                            <input type="text" class="form-control" id="nombre"
-                                                                name="nombre" required>
-                                                        </div>
+                                                    <form id="registroAlumno">
+                                                        <div
+                                                            style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px;">
+                                                            <div class="form-group">
+                                                                <label for="nombre">Nombre:</label>
+                                                                <input type="text" class="form-control" id="nombre"
+                                                                    name="nombre" required>
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <label for="usuario">Usuario:</label>
-                                                            <input type="text" class="form-control" id="usuario"
-                                                                name="usuario" required>
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <label for="dni">Dni:</label>
+                                                                <input type="text" class="form-control" id="dni"
+                                                                    name="dni" required>
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <label for="password">Password:</label>
-                                                            <input type="password" class="form-control" id="password"
-                                                                name="password" required>
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <label for="edad">Edad:</label>
+                                                                <input type="number" class="form-control" id="edad"
+                                                                    name="edad" required>
+                                                            </div>
 
-                                     
+                                                            <div class="form-group">
+                                                                <label for="direccion">Direccion:</label>
+                                                                <input type="text" class="form-control" id="direccion"
+                                                                    name="direccion" required>
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <input type="hidden" class="form-control"
-                                                                id="estado_usuario" value="1" name="estado_usuario">
+
+                                                            <div class="form-group">
+                                                                <label for="telefono">Telefono:</label>
+                                                                <input type="number" class="form-control" id="telefono"
+                                                                    name="telefono" required>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="telefono">CORREO Electronico :</label>
+                                                                <input type="email" class="form-control" id="correo"
+                                                                    name="correo" required>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="telefono">Fecha Nacimiento:</label>
+                                                                <input type="date" class="form-control"
+                                                                    id="fecha_nacimiento" name="fecha_nacimiento"
+                                                                    required>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="telefono">fecha_registro:</label>
+                                                                <input type="date" class="form-control"
+                                                                    id="fecha_registro" name="fecha_registro" required>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="rol">Grado:</label>
+                                                                <select class="form-select" id="grado" name="grado">
+                                                                    <% grados.forEach(function(grado) { %>
+                                                                        <option value="<%= grado.id_grado %>">
+                                                                            <%= grado.nombre %>
+                                                                        </option>
+                                                                        <% }); %>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="rol">Seccion:</label>
+                                                                <select class="form-select" id="seccion" name="seccion">
+                                                                    <% secciones.forEach(function(seccion) { %>
+                                                                        <option value="<%= seccion.id_seccion %>">
+                                                                            <%= seccion.nombre %>
+                                                                        </option>
+                                                                        <% }); %>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="rol">Colegio:</label>
+                                                                <select class="form-select" id="colegio" name="colegio">
+                                                                    <option value="<%= idcolegio %>">
+                                                                        <%= colegio %> - <%= distrito %>
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <input type="hidden" class="form-control" id="estado"
+                                                                    value="1" name="estado">
+                                                            </div>
+
+                                                            <button style="margin-top: 16px;" type="submit"
+                                                                class="btn btn-primary">Registrar</button>
+
                                                         </div>
-                                                        <button type="submit" class="btn btn-primary">Registrar</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -104,36 +171,66 @@
                                                     <th>Alumno</th>
                                                     <th>DNI</th>
                                                     <th>EDAD</th>
+                                                    <th>direccion</th>
+                                                    <th>telefono</th>
+                                                    <th>Correo</th>
+                                                    <th>FECHA Nacimiento</th>
                                                     <th>FECHA REGISTRO</th>
+                                                    <th>GRADO</th>
+                                                    <th>SECCION</th>
                                                     <th>COLEGIO</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% alumnos.forEach(alumno => {
+                                                <% alumnos.forEach(alumno=> {
                                                     if ( alumno.colegio.nombre_colegio === colegio) { %>
-                                                      <tr>
-                                                          <td>
-                                                              <%= alumno.nombre %>
-                                                          </td>
-                                                          <td>
-                                                              <%= alumno.dni %>
-                                                          </td>
-                                                          <td>
-                                                              <%= alumno.edad %>
-                                                          </td>
-                                                          <td>
+                                                    <tr>
+                                                        <td>
+                                                            <%= alumno.nombre %>
+                                                        </td>
+                                                        <td>
+                                                            <%= alumno.dni %>
+                                                        </td>
+                                                        <td>
+                                                            <%= alumno.edad %>
+                                                        </td>
+                                                        <td>
+                                                            <%= alumno.direccion %>
+                                                        </td>
+                                                        <td>
+                                                            <%= alumno.telefono %>
+                                                        </td>
+                                                        <td>
+                                                            <%= alumno.correo %>
+                                                        </td>
+                                                        <td>
+                                                            <%= alumno.fecha_nacimiento %>
+                                                        </td>
+                                                        <td>
                                                             <%= alumno.fecha_registro %>
                                                         </td>
                                                         <td>
-                                                            <%= colegio %> - <%= distrito %> 
+                                                            <%= alumno.grado.nombre %>
                                                         </td>
                                                         <td>
-                                                          <button>Actualizar</button>
-                                                      </td>
-                                                        
-                                                      </tr>
-                                                  <% } }); %>                                                  
+                                                            <%= alumno.seccion.nombre%>
+                                                        </td>
+                                                        <td>
+                                                            <%= colegio %> - <%= distrito %>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-success"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModalActualizacion"
+                                                                onclick="cargarDatosAlumno('<%=alumno.id_estudiante %>', '<%= alumno.nombre %>', '<%= alumno.dni  %>','<%= alumno.edad  %>','<%= alumno.direccion  %>' ,'<%= alumno.telefono  %>','<%= alumno.correo  %>','<%= alumno.fecha_nacimiento  %>' ,'<%= alumno.fecha_registro  %>', '<%= alumno.estado  %>' , '<%= alumno.grado.id_grado  %>' ,'<%= alumno.seccion.id_seccion %>' , '<%= alumno.colegio.id_colegio %>')"
+                                                                title="Actualizar">
+                                                                <i class="bi bi-arrow-up-right-square-fill"></i>
+                                                            </button>
+                                                        </td>
+
+                                                    </tr>
+                                                    <% } }); %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -142,46 +239,116 @@
                                         <!-- Modal de actualización -->
                                         <div class="modal fade" id="exampleModalActualizacion" tabindex="-1"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog modal-xl">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Actualizar
-                                                            Usuario</h5>
+                                                            Alumno</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <!-- Aquí puedes agregar los campos de actualización del usuario -->
-                                                        <form id="ActualizarUsuarioForm">
-                                                            <div class="form-group">
+                                                        <form id="Actualizar">
+                                                                   
+                                                            <input type="hidden" class="form-control"
+                                                            id="idalumno" name="idalumno" required>
+                                                            <div
+                                                                style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px;">
+                                                                <div class="form-group">
+                                                                    <label for="nombre">Nombre:</label>
+                                                                    <input type="text" class="form-control" id="nombre2"
+                                                                        name="nombre" required>
+                                                                </div>
 
-                                                                <input type="hidden" class="form-control"
-                                                                    id="idusuario">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="nombre">Nombre:</label>
-                                                                <input type="text" class="form-control" id="nombre2">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="usuario">Usuario:</label>
-                                                                <input type="text" class="form-control" id="usuario2">
-                                                            </div>
+                                                                <div class="form-group">
+                                                                    <label for="dni">Dni:</label>
+                                                                    <input type="text" class="form-control" id="dni2"
+                                                                        name="dni" required>
+                                                                </div>
 
-                                                            <div class="form-group">
+                                                                <div class="form-group">
+                                                                    <label for="edad">Edad:</label>
+                                                                    <input type="number" class="form-control" id="edad2"
+                                                                        name="edad" required>
+                                                                </div>
 
-                                                                <input type="hidden" class="form-control"
-                                                                    id="password2">
+                                                                <div class="form-group">
+                                                                    <label for="direccion">Direccion:</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="direccion2" name="direccion" required>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <label for="telefono">Telefono:</label>
+                                                                    <input type="number" class="form-control"
+                                                                        id="telefono2" name="telefono" required>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="telefono">CORREO Electronico :</label>
+                                                                    <input type="email" class="form-control" id="correo2"
+                                                                        name="correo" required>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="telefono">Fecha Nacimiento:</label>
+                                                                    <input type="date" class="form-control"
+                                                                        id="fecha_nacimiento2" name="fecha_nacimiento"
+                                                                        required>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="telefono">fecha_registro:</label>
+                                                                    <input type="date" class="form-control"
+                                                                        id="fecha_registro2" name="fecha_registro"
+                                                                        required>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="rol">Grado:</label>
+                                                                    <select class="form-select" id="grado2"
+                                                                        name="grado">
+                                                                        <% grados.forEach(function(grado) { %>
+                                                                            <option value="<%= grado.id_grado %>">
+                                                                                <%= grado.nombre %>
+                                                                            </option>
+                                                                            <% }); %>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="rol">Seccion:</label>
+                                                                    <select class="form-select" id="seccion2"
+                                                                        name="seccion">
+                                                                        <% secciones.forEach(function(seccion) { %>
+                                                                            <option value="<%= seccion.id_seccion %>">
+                                                                                <%= seccion.nombre %>
+                                                                            </option>
+                                                                            <% }); %>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="rol">Colegio:</label>
+                                                                    <select class="form-select" id="colegio2"
+                                                                        name="colegio">
+                                                                        <option value="<%= idcolegio %>">
+                                                                            <%= colegio %> - <%= distrito %>
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <input type="hidden" class="form-control"
+                                                                        id="estado2" value="1" name="estado">
+                                                                </div>
+
+                                                                <button style="margin-top: 16px;" type="submit"
+                                                                    class="btn btn-primary">Actualizar</button>
+
                                                             </div>
-
-                                              
-
-                                                            <div class="form-group">
-                                                                <input type="hidden" class="form-control"
-                                                                    id="estado_usuario2" value="1"
-                                                                    name="estado_usuario">
-                                                            </div>
-                                                            <button type="submit"
-                                                                class="btn btn-primary">Actualizar</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -200,26 +367,46 @@
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                         <script>
-                            document.getElementById('registroUsuario').addEventListener('submit', function (event) {
+                            document.getElementById('registroAlumno').addEventListener('submit', function (event) {
                                 event.preventDefault();
 
-                                var nombredelRol = document.getElementById('nombre').value;
-                                var usuario = document.getElementById('usuario').value;
-                                var password = document.getElementById('password').value;
-                                var roles = document.getElementById('rol2').value;
-                                var estado = document.getElementById('estado_usuario').value;
+                                var nombreEstudiante = document.getElementById('nombre').value;
+                                var dni = document.getElementById('dni').value;
+                                var edad = document.getElementById('edad').value;
+                                var direccion = document.getElementById('direccion').value;
+                                var telefono = document.getElementById('telefono').value;
+                                var correo = document.getElementById('correo').value;
+                                var fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+                                var fecha_registro = document.getElementById('fecha_registro').value;
+                                var estado = document.getElementById('estado').value;
+                                var grado = document.getElementById('grado').value;
+                                var seccion = document.getElementById('seccion').value;
+                                var colegio = document.getElementById('colegio').value;
+
 
                                 var enviarlosDatos = {
-
-                                    nombre: nombredelRol,
-                                    usuario: usuario,
-                                    password: password,
-                                    id_rol: roles,
-                                    estado_user: estado
+                                    nombre: nombreEstudiante,
+                                    dni: dni,
+                                    edad: edad,
+                                    direccion: direccion,
+                                    telefono: telefono,
+                                    correo: correo,
+                                    fecha_nacimiento: fecha_nacimiento,
+                                    fecha_registro: fecha_registro,
+                                    estado: estado,
+                                    grado: {
+                                        id_grado: grado,
+                                    },
+                                    seccion: {
+                                        id_seccion: seccion,
+                                    },
+                                    colegio: {
+                                        id_colegio: colegio,
+                                    }
                                 };
 
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.post('/admin/usuarios', enviarlosDatos)
+                                axios.post('http://ie.spring.informaticapp.com:8383/admin/alumnos', enviarlosDatos)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({
@@ -243,38 +430,63 @@
                         </script>
 
                         <script>
-                            function cargarDatosUsuario(id, nombre, usuario, password, rol, estado) {
+                            function cargarDatosAlumno(idalumno, nombre, dni, edad, direccion, telefono, correo, fecha_nacimiento, fecha_registro, estado, grado, seccion, colegio) {
                                 // Asignar los valores de los campos en el modal con los datos capturados por ID
-                                document.getElementById('idusuario').value = id;
+                                document.getElementById('idalumno').value =  idalumno;
                                 document.getElementById('nombre2').value = nombre;
-                                document.getElementById('usuario2').value = usuario;
-                                document.getElementById('password2').value = password;
-                                document.getElementById('roles').value = rol;
-                                document.getElementById('estado_usuario2').value = estado;
+                                document.getElementById('dni2').value = dni;
+                                document.getElementById('edad2').value = edad;
+                                document.getElementById('direccion2').value = direccion;
+                                document.getElementById('telefono2').value = telefono;
+                                document.getElementById('correo2').value = correo;
+                                document.getElementById('fecha_nacimiento2').value = fecha_nacimiento;
+                                document.getElementById('fecha_registro2').value = fecha_registro;
+                                document.getElementById('estado2').value = estado;
+                                document.getElementById('grado2').value = grado;
+                                document.getElementById('seccion2').value = seccion;
+                                document.getElementById('colegio2').value = colegio;
                             }
 
-                            document.getElementById('ActualizarUsuarioForm').addEventListener('submit', function (event) {
+                            document.getElementById('Actualizar').addEventListener('submit', function (event) {
                                 event.preventDefault();
 
-                                var idusuario = document.getElementById('idusuario').value;
-                                var nombreusuario = document.getElementById('nombre2').value;
-                                var usuario = document.getElementById('usuario2').value;
-                                var password = document.getElementById('password2').value;
-                                var rolusuario = document.getElementById('roles').value;
-                                var estado = document.getElementById('estado_usuario2').value;
+                                var idalumno = document.getElementById('idalumno').value;
+                                var nombreEstudiante = document.getElementById('nombre2').value;
+                                var dni = document.getElementById('dni2').value;
+                                var edad = document.getElementById('edad2').value;
+                                var direccion = document.getElementById('direccion2').value;
+                                var telefono = document.getElementById('telefono2').value;
+                                var correo = document.getElementById('correo2').value;
+                                var fecha_nacimiento = document.getElementById('fecha_nacimiento2').value;
+                                var fecha_registro = document.getElementById('fecha_registro2').value;
+                                var estado = document.getElementById('estado2').value;
+                                var grado = document.getElementById('grado2').value;
+                                var seccion = document.getElementById('seccion2').value;
+                                var colegio = document.getElementById('colegio2').value;
 
-                                const datosParaActualizar = {
-                                    idusuario: idusuario,
-                                    nombre: nombreusuario,
-                                    usuario: usuario,
-                                    password: password,
-                                    roles: {
-                                        idrol: rolusuario
+                                var datosParaActualizar = {
+                                    id_estudiante : idalumno,
+                                    nombre: nombreEstudiante,
+                                    dni: dni,
+                                    edad: edad,
+                                    direccion: direccion,
+                                    telefono: telefono,
+                                    correo: correo,
+                                    fecha_nacimiento: fecha_nacimiento,
+                                    fecha_registro: fecha_registro,
+                                    estado: estado,
+                                    grado: {
+                                        id_grado: grado,
                                     },
-                                    estado_usuario: estado
+                                    seccion: {
+                                        id_seccion: seccion,
+                                    },
+                                    colegio: {
+                                        id_colegio: colegio,
+                                    }
                                 };
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.put('http://ie.spring.informaticapp.com:8383/admin/usuarios', datosParaActualizar)
+                                axios.put('http://ie.spring.informaticapp.com:8383/admin/alumnos', datosParaActualizar)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({

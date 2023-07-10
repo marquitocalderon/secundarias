@@ -50,7 +50,7 @@
                                 <div class="col-12" style="margin-bottom: 1em;">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">
-                                        REGISTRAR ALUMNOS
+                                        REGISTRAR CURSOS
                                     </button>
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -59,35 +59,32 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar
-                                                        Alumnos</h1>
+                                                        Cursos</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="registroUsuario">
+                                                    <form id="registro">
                                                         <div class="form-group">
                                                             <label for="nombre">Nombre:</label>
                                                             <input type="text" class="form-control" id="nombre"
                                                                 name="nombre" required>
                                                         </div>
 
+                                  
                                                         <div class="form-group">
-                                                            <label for="usuario">Usuario:</label>
-                                                            <input type="text" class="form-control" id="usuario"
-                                                                name="usuario" required>
+                                                            <label for="rol">Colegio:</label>
+                                                            <select class="form-select" id="colegio" name="colegio">
+                                                                <option value="<%= idcolegio %>">
+                                                                    <%= colegio %> - <%= distrito %>
+                                                                </option>
+                                                            </select>
                                                         </div>
-
-                                                        <div class="form-group">
-                                                            <label for="password">Password:</label>
-                                                            <input type="password" class="form-control" id="password"
-                                                                name="password" required>
-                                                        </div>
-
                                      
 
                                                         <div class="form-group">
                                                             <input type="hidden" class="form-control"
-                                                                id="estado_usuario" value="1" name="estado_usuario">
+                                                                id="estado" value="1" name="estado">
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Registrar</button>
                                                     </form>
@@ -188,26 +185,24 @@
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                         <script>
-                            document.getElementById('registroUsuario').addEventListener('submit', function (event) {
+                            document.getElementById('registro').addEventListener('submit', function (event) {
                                 event.preventDefault();
 
-                                var nombredelRol = document.getElementById('nombre').value;
-                                var usuario = document.getElementById('usuario').value;
-                                var password = document.getElementById('password').value;
-                                var roles = document.getElementById('rol2').value;
-                                var estado = document.getElementById('estado_usuario').value;
+                                var nombrecurso = document.getElementById('nombre').value;
+                                var colegio = document.getElementById('colegio').value;
+                                var estado = document.getElementById('estado').value;
 
                                 var enviarlosDatos = {
 
-                                    nombre: nombredelRol,
-                                    usuario: usuario,
-                                    password: password,
-                                    id_rol: roles,
-                                    estado_user: estado
+                                    nombre: nombrecurso,
+                                    estado : estado,
+                                    colegio :{
+                                        id_colegio: colegio
+                                    }
                                 };
 
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.post('/admin/usuarios', enviarlosDatos)
+                                axios.post('http://ie.spring.informaticapp.com:8383/admin/materias', enviarlosDatos)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({

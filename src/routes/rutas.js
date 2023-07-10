@@ -47,6 +47,7 @@ function protectRoute(req, res, next) {
     req.userId = user.id;
     req.userroles = user.roles;
     req.userColegio = user.colegio;
+    req.userIdColegio = user.id_colegio;
     req.userDistrito = user.distrito;
     req.userCorreo = user.correo;
     next(); // Permitir el acceso
@@ -94,6 +95,7 @@ router.post("/login", async (req, res) => {
         req.session.user = {
           id: usuario.id_usuario,
           roles: usuario.roles.nombre,
+          id_colegio: usuario.colegio.id_colegio,
           colegio: usuario.colegio.nombre_colegio,
           distrito: usuario.colegio.distrito.nombre_distrito,
           correo: usuario.usuario

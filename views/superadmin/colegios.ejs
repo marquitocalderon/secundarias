@@ -59,37 +59,56 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar
-                                                        Usuarios</h1>
+                                                        Colegios</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="registroUsuario">
+                                                    <form id="registroColegios">
                                                         <div class="form-group">
-                                                            <label for="nombre">Nombre:</label>
+                                                            <label for="nombre">nombre_colegio:</label>
                                                             <input type="text" class="form-control" id="nombre"
                                                                 name="nombre" required>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="usuario">Usuario:</label>
-                                                            <input type="text" class="form-control" id="usuario"
-                                                                name="usuario" required>
+                                                            <label for="rol">distrito:</label>
+                                                            <select class="form-select" id="distrito" name="distrito">
+                                                                <% vistadistritos.forEach(function(distrito) { %>
+                                                                    <option value="<%= distrito.id_distrito %>">
+                                                                        <%= distrito.nombre_distrito %>
+                                                                    </option>
+                                                                    <% }); %>
+                                                            </select>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="password">Password:</label>
-                                                            <input type="password" class="form-control" id="password"
-                                                                name="password" required>
+                                                            <label for="direccion">direccion:</label>
+                                                            <input type="text" class="form-control" id="direccion"
+                                                                name="direccion" required>
                                                         </div>
 
-                                   
+                                                        <div class="form-group">
+                                                            <label for="telefono">telefono:</label>
+                                                            <input type="number" class="form-control" id="telefono"
+                                                                name="telefono" required>
+                                                        </div>
 
-                                             
+                                                        <div class="form-group">
+                                                            <label for="rol">tipo_institucion:</label>
+                                                            <select class="form-select" id="tipo_institucion" name="tipo_institucion">
+                                                                    <option value="Publica">
+                                                                       Publica
+                                                                    </option>
+                                                                    <option value="Privada">
+                                                                        Privada
+                                                                     </option>
+                                                            </select>
+                                                        </div>
 
                                                         <div class="form-group">
                                                             <input type="hidden" class="form-control"
-                                                                id="estado_usuario" value="1" name="estado_usuario">
+                                                                id="estado" value="1" name="estado">
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Registrar</button>
                                                     </form>
@@ -133,7 +152,9 @@
                                                     <td>
                                                       <%= colegio.tipo_institucion %>
                                                   </td>
-                                              
+                                              <td>
+                                                <button>actualizar</button>
+                                              </td>
                                        
                                                     </tr>
                                                     <% }); %>                                                 
@@ -202,28 +223,30 @@
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                         <script>
-                            document.getElementById('registroUsuario').addEventListener('submit', function (event) {
+                            document.getElementById('registroColegios').addEventListener('submit', function (event) {
                                 event.preventDefault();
 
-                                var nombreUsuario = document.getElementById('nombre').value;
-                                var usuario = document.getElementById('usuario').value;
-                                var password = document.getElementById('password').value;
-                                var roles = document.getElementById('rol2').value;
-                                var colegio = document.getElementById('colegio2').value;
-                                var estado = document.getElementById('estado_usuario').value;
+                                var nombreColegio = document.getElementById('nombre').value;
+                                var distrito = document.getElementById('distrito').value;
+                                var direccion = document.getElementById('direccion').value;
+                                var telefono = document.getElementById('telefono').value;
+                                var tipo_institucion = document.getElementById('tipo_institucion').value;
+                                var estado = document.getElementById('estado').value;
 
                                 var enviarlosDatos = {
 
-                                    nombre: nombreUsuario,
-                                    usuario: usuario,
-                                    password: password,
-                                    rol: roles,
-                                    colegioUsuario: colegio,
-                                    estado_user: estado
+                                    nombre_colegio: nombreColegio,
+                                    distrito : {
+                                        id_distrito : distrito
+                                    },
+                                    direccion: direccion,
+                                    telefono: telefono,
+                                    tipo_institucion: tipo_institucion,
+                                    estado: estado
                                 };
 
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.post('/super/usuarios', enviarlosDatos)
+                                axios.post('http://ie.spring.informaticapp.com:8383/admin/colegios', enviarlosDatos)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({

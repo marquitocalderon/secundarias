@@ -64,32 +64,70 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="registroUsuario">
-                                                        <div class="form-group">
-                                                            <label for="nombre">Nombre:</label>
-                                                            <input type="text" class="form-control" id="nombre"
-                                                                name="nombre" required>
-                                                        </div>
+                                                    <form id="registroDocente">
+                                                        <div
+                                                            style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px;">
+                                                            <div class="form-group">
+                                                                <label for="nombre">Nombre:</label>
+                                                                <input type="text" class="form-control" id="nombre"
+                                                                    name="nombre" required>
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <label for="usuario">Usuario:</label>
-                                                            <input type="text" class="form-control" id="usuario"
-                                                                name="usuario" required>
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <label for="dni">Dni:</label>
+                                                                <input type="text" class="form-control" id="dni"
+                                                                    name="dni" required>
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <label for="password">Password:</label>
-                                                            <input type="password" class="form-control" id="password"
-                                                                name="password" required>
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <label for="edad">Edad:</label>
+                                                                <input type="number" class="form-control" id="edad"
+                                                                    name="edad" required>
+                                                            </div>
 
-                                     
+                                                            <div class="form-group">
+                                                                <label for="telefono">Telefono:</label>
+                                                                <input type="number" class="form-control" id="telefono"
+                                                                    name="telefono" required>
+                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <input type="hidden" class="form-control"
-                                                                id="estado_usuario" value="1" name="estado_usuario">
+                                                            <div class="form-group">
+                                                                <label for="telefono">CORREO Electronico :</label>
+                                                                <input type="email" class="form-control" id="correo"
+                                                                    name="correo" required>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="telefono">Fecha Nacimiento:</label>
+                                                                <input type="date" class="form-control"
+                                                                    id="fecha_nacimiento" name="fecha_nacimiento"
+                                                                    required>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="telefono">fecha_registro:</label>
+                                                                <input type="date" class="form-control"
+                                                                    id="fecha_registro" name="fecha_registro" required>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="rol">Colegio:</label>
+                                                                <select class="form-select" id="colegio" name="colegio">
+                                                                    <option value="<%= idcolegio %>">
+                                                                        <%= colegio %> - <%= distrito %>
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <input type="hidden" class="form-control" id="estado"
+                                                                    value="1" name="estado">
+                                                            </div>
+
+                                                            <button style="margin-top: 16px;" type="submit"
+                                                                class="btn btn-primary">Registrar</button>
+
                                                         </div>
-                                                        <button type="submit" class="btn btn-primary">Registrar</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -104,6 +142,9 @@
                                                     <th>Docente</th>
                                                     <th>DNI</th>
                                                     <th>EDAD</th>
+                                                    <th>telefono</th>
+                                                    <th>correo</th>
+                                                    <th>FECHA Nacimiento</th>
                                                     <th>FECHA REGISTRO</th>
                                                     <th>COLEGIO</th>
                                                     <th>Acciones</th>
@@ -122,6 +163,15 @@
                                                           <td>
                                                               <%= docente.edad %>
                                                           </td>
+                                                          <td>
+                                                            <%= docente.telefono %>
+                                                        </td>
+                                                        <td>
+                                                            <%= docente.correo %>
+                                                        </td>
+                                                        <td>
+                                                            <%= docente.fecha_nacimiento %>
+                                                        </td>
                                                           <td>
                                                             <%= docente.fecha_registro %>
                                                         </td>
@@ -200,26 +250,36 @@
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                         <script>
-                            document.getElementById('registroUsuario').addEventListener('submit', function (event) {
+                            document.getElementById('registroDocente').addEventListener('submit', function (event) {
                                 event.preventDefault();
 
-                                var nombredelRol = document.getElementById('nombre').value;
-                                var usuario = document.getElementById('usuario').value;
-                                var password = document.getElementById('password').value;
-                                var roles = document.getElementById('rol2').value;
-                                var estado = document.getElementById('estado_usuario').value;
+                                var nombreEstudiante = document.getElementById('nombre').value;
+                                var dni = document.getElementById('dni').value;
+                                var edad = document.getElementById('edad').value;
+                                var telefono = document.getElementById('telefono').value;
+                                var correo = document.getElementById('correo').value;
+                                var fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+                                var fecha_registro = document.getElementById('fecha_registro').value;
+                                var estado = document.getElementById('estado').value;
+                                var colegio = document.getElementById('colegio').value;
+
 
                                 var enviarlosDatos = {
-
-                                    nombre: nombredelRol,
-                                    usuario: usuario,
-                                    password: password,
-                                    id_rol: roles,
-                                    estado_user: estado
+                                    nombre: nombreEstudiante,
+                                    dni: dni,
+                                    edad: edad,
+                                    telefono: telefono,
+                                    correo: correo,
+                                    fecha_nacimiento: fecha_nacimiento,
+                                    fecha_registro: fecha_registro,
+                                    estado: estado,
+                                    colegio: {
+                                        id_colegio: colegio,
+                                    }
                                 };
 
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.post('/admin/usuarios', enviarlosDatos)
+                                axios.post('http://ie.spring.informaticapp.com:8383/admin/docentes', enviarlosDatos)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({
