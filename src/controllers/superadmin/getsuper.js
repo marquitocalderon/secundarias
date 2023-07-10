@@ -251,13 +251,17 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
     }
   };
   
+
   const vistaRegistrarProvincias = async (req, res) => {
-   
+ 
     try {
       const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/provincias");
       const vistaprovincias = response.data; // Suponiendo que la respuesta contiene los datos de los roles
   
-      res.render("superadmin/registrarprovincias", {vistaprovincias}); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
+      const responsedepartamentos = await axios.get("http://ie.spring.informaticapp.com:8383/admin/departamentos");
+      const vistadepartamentos = responsedepartamentos.data; // Suponiendo que la respuesta contiene los datos de los roles
+  
+      res.render("superadmin/registrarprovincias", {vistaprovincias , vistadepartamentos}); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
   
     } catch (error) {
       res.render("superadmin/registrarprovincias"); // Renderiza una vista de error en caso de que ocurra un problema con la solicitud
@@ -265,12 +269,18 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
   };
   
   const vistaRegistrarDistritos = async (req, res) => {
-   
+ 
     try {
       const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/distritos");
       const vistadistritos = response.data; // Suponiendo que la respuesta contiene los datos de los roles
   
-      res.render("superadmin/registrardistritos", {vistadistritos}); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
+      const responseprovincias = await axios.get("http://ie.spring.informaticapp.com:8383/admin/provincias");
+      const vistaprovincias = responseprovincias.data; // Suponiendo que la respuesta contiene los datos de los roles
+  
+      const responsedepartamentos = await axios.get("http://ie.spring.informaticapp.com:8383/admin/departamentos");
+      const vistadepartamentos = responsedepartamentos.data; // Suponiendo que la respuesta contiene los datos de los roles
+  
+      res.render("superadmin/registrardistritos", {vistadistritos, vistaprovincias, vistadepartamentos}); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
   
     } catch (error) {
       res.render("superadmin/registrardistritos"); // Renderiza una vista de error en caso de que ocurra un problema con la solicitud
@@ -278,8 +288,39 @@ const vistaSuperRegistrarDocentes = async (req, res) => {
   };
 
 
+   
+  const vistaRegistrarMatricula = async (req, res) => {
+   
+    try {
+      const userId = req.userId;
+      const roles2 = req.userroles;
+      const colegio = req.userColegio;
+      const distrito = req.userDistrito;
+      const idcolegio = req.userIdColegio;
+
+      const responseperiodos = await axios.get("http://ie.spring.informaticapp.com:8383/admin/periodos");
+      const periodos= responseperiodos.data;
+
+      const responsematricula = await axios.get("http://ie.spring.informaticapp.com:8383/admin/matricula");
+      const vistamatricula = responsematricula.data; // Suponiendo que la respuesta contiene los datos de los roles
+
+      const responseColegios = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
+      const colegios = responseColegios.data;
+
+      const responseAlumno = await axios.get("http://ie.spring.informaticapp.com:8383/admin/alumnos");
+      const alumnos = responseAlumno.data; 
+
+  
+      res.render("superadmin/matricula", {vistamatricula, periodos , colegio, colegios , idcolegio , distrito , roles2 , userId , alumnos}); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
+  
+    } catch (error) {
+      res.render("superadmin/matricula"); // Renderiza una vista de error en caso de que ocurra un problema con la solicitud
+    }
+  }; 
 
 
 
-module.exports = { vistasuper , vistaSuperRegistrarUsuario , vistaSuperRegistrarRoles , vistaSuperRegistrarColegios , vistaSuperRegistrarAlumnos , vistaSuperRegistrarDocentes , vistaSuperRegistrarAsignacion , vistasuperRegistrarCursos , vistasupergrados , vistasuperRegistrarPeriodos , vistaRegistrarDepartamentos, vistaRegistrarDistritos, vistaRegistrarProvincias
+
+
+module.exports = { vistasuper , vistaSuperRegistrarUsuario , vistaSuperRegistrarRoles , vistaSuperRegistrarColegios , vistaSuperRegistrarAlumnos , vistaSuperRegistrarDocentes , vistaSuperRegistrarAsignacion , vistasuperRegistrarCursos , vistasupergrados , vistasuperRegistrarPeriodos , vistaRegistrarDepartamentos, vistaRegistrarDistritos, vistaRegistrarProvincias , vistaRegistrarMatricula
 };

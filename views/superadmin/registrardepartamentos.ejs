@@ -48,50 +48,19 @@
 
               <div class="row">
                 <div class="col-12" style="margin-bottom: 1em;">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    REGISTRAR COLEGIOS
-                  </button>
 
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar
-                            Usuarios</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form id="registroUsuario">
-                            <div class="form-group">
-                              <label for="nombre">Nombre:</label>
-                              <input type="text" class="form-control" id="nombre" name="nombre" required>
-                            </div>
-
-                            <div class="form-group">
-                              <label for="usuario">Usuario:</label>
-                              <input type="text" class="form-control" id="usuario" name="usuario" required>
-                            </div>
-
-                            <div class="form-group">
-                              <label for="password">Password:</label>
-                              <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-
-
-
-
-
-                            <div class="form-group">
-                              <input type="hidden" class="form-control" id="estado_usuario" value="1"
-                                name="estado_usuario">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Registrar</button>
-                          </form>
-                        </div>
-                      </div>
+                  <form id="registroDepartamentos">
+                    <div class="form-group">
+                      <label for="nombre">Departamento:</label>
+                      <input type="text" class="form-control" id="Departamento" name="Departamento"
+                        placeholder="Ingrese el nombre del departamento">
                     </div>
-                  </div>
+                    <div class="form-group">
+                      <input type="hidden" class="form-control" id="estado" value="1" name="estado">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                  </form>
+
                 </div>
                 <div class="col-12">
                   <div class="table-responsive">
@@ -175,30 +144,21 @@
             <!-- ACA VA IR EL POST Y EL PUT Y EL DELETE -->
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
             <script>
-              document.getElementById('registroUsuario').addEventListener('submit', function (event) {
+              document.getElementById('registroDepartamentos').addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                var nombreUsuario = document.getElementById('nombre').value;
-                var usuario = document.getElementById('usuario').value;
-                var password = document.getElementById('password').value;
-                var roles = document.getElementById('rol2').value;
-                var colegio = document.getElementById('colegio2').value;
-                var estado = document.getElementById('estado_usuario').value;
+                var departamento = document.getElementById('Departamento').value;
+                var estado = document.getElementById('estado').value;
 
                 var enviarlosDatos = {
 
-                  nombre: nombreUsuario,
-                  usuario: usuario,
-                  password: password,
-                  rol: roles,
-                  colegioUsuario: colegio,
-                  estado_user: estado
+                  nombre_departamento: departamento,
+                  estado: estado
                 };
 
                 // Realizar la solicitud POST utilizando Axios
-                axios.post('/super/usuarios', enviarlosDatos)
+                axios.post('http://ie.spring.informaticapp.com:8383/admin/departamentos', enviarlosDatos)
                   .then(function (response) {
                     // Mostrar una notificación SweetAlert exitosa
                     Swal.fire({
@@ -222,43 +182,32 @@
             </script>
 
             <script>
-              function cargarDatosUsuario(id, nombre, usuario, password, rol, colegio, estado) {
+              function cargarDatos(id, provincia, departamento, estado) {
                 // Asignar los valores de los campos en el modal con los datos capturados por ID
-                document.getElementById('idusuario').value = id;
-                document.getElementById('nombre2').value = nombre;
-                document.getElementById('usuario2').value = usuario;
-                document.getElementById('password2').value = password;
-                document.getElementById('roles').value = rol;
-                document.getElementById('colegio').value = colegio;
-                document.getElementById('estado_usuario2').value = estado;
+                document.getElementById('IDProvincia2').value = id;
+                document.getElementById('Provincia2').value = provincia;
+                document.getElementById('departamento2').value = departamento;
+                document.getElementById('estado2').value = estado;
               }
 
-              document.getElementById('ActualizarUsuarioForm').addEventListener('submit', function (event) {
+              document.getElementById('actualizacionProvincias').addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                var idusuario = document.getElementById('idusuario').value;
-                var nombreusuario = document.getElementById('nombre2').value;
-                var usuario = document.getElementById('usuario2').value;
-                var password = document.getElementById('password2').value;
-                var rolusuario = document.getElementById('roles').value;
-                var colegioUsuario = document.getElementById('colegio').value;
-                var estado = document.getElementById('estado_usuario2').value;
+                var idprovincia = document.getElementById('IDProvincia2').value;
+                var nombre_provincia = document.getElementById('Provincia2').value;
+                var departamento = document.getElementById('departamento2').value;
+                var estado = document.getElementById('estado2').value;
 
                 const datosParaActualizar = {
-                  id_usuario: idusuario,
-                  nombre: nombreusuario,
-                  usuario: usuario,
-                  password: password,
-                  roles: {
-                    id_rol: rolusuario
+                  id_provincia: idprovincia,
+                  nombre_provincia: nombre_provincia,
+                  departamento: {
+                    id_departamento: departamento,
                   },
-                  colegio: {
-                    id_colegio: colegioUsuario
-                  },
-                  estado_usuario: estado
+                  estado: estado
                 };
                 // Realizar la solicitud POST utilizando Axios
-                axios.put('http://ie.spring.informaticapp.com:8383/admin/usuarios', datosParaActualizar)
+                axios.put('http://ie.spring.informaticapp.com:8383/admin/provincias', datosParaActualizar)
                   .then(function (response) {
                     // Mostrar una notificación SweetAlert exitosa
                     Swal.fire({
@@ -278,9 +227,41 @@
                       icon: 'error'
                     });
                   });
-
-
               })
+            </script>
+
+            <script>
+              function confirmarEliminacion(idProvincia) {
+                Swal.fire({
+                  title: 'Confirmar eliminación',
+                  text: '¿Estás seguro de que deseas eliminar este elemento?',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Eliminar',
+                  cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    // Realizar solicitud DELETE con Axios
+                    axios.delete('http://ie.spring.informaticapp.com:8383/admin/provincias/' + idProvincia)
+                      .then(response => {
+                        // Redireccionar u realizar cualquier acción adicional después de eliminar
+                        location.reload();
+                      })
+                      .catch(error => {
+                        console.error(error);
+                        // Mostrar mensaje de error si la solicitud falla
+                        Swal.fire({
+                          icon: 'error',
+                          title: 'Error',
+                          text: 'No se pudo eliminar el elemento.'
+                        });
+                      });
+                  }
+                });
+              }
+
             </script>
 
         </div>
