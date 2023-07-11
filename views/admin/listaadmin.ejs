@@ -37,27 +37,44 @@
           <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Vistas:</h6>
               <a class="collapse-item" href="/admin/usuarios">Usuarios</a>
-              <a class="collapse-item" href="#">Roles</a>
-              <a class="collapse-item" href="/admin/alumnos">Alumnos</a>
+
           </div>
       </div>
   </li>
+
+
+    <!-- SEGURIDAD-->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#administracion"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Colegios</span>
+        </a>
+        <div id="administracion" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Vistas:</h6>
+                <a class="collapse-item" href="/admin/departamentos">Departamentos</a>
+                <a class="collapse-item" href="/admin/provincias">Provincias</a>
+                <a class="collapse-item" href="/admin/distritos">Disitritos</a>
+                <a class="collapse-item" href="/admin/colegios">Colegios</a>
+            </div>
+        </div>
+    </li>
 
   <!-- REGISTRAR ALUMNO Y DOCENTES -->
   <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registrarAlumnoYDocente"
           aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>DATOS DEL COLEGIOS</span>
+          <span>Estudiante</span>
       </a>
       <div id="registrarAlumnoYDocente" class="collapse" aria-labelledby="headingUtilities"
           data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Vistas:</h6>
-              <a class="collapse-item" href="#">Alumnos</a>
-              <a class="collapse-item" href="#">Docentes</a>
-              <a class="collapse-item" href="#">Grados</a>
-              <a class="collapse-item" href="#">Secciones</a>
+              <a class="collapse-item" href="/admin/alumnos">Alumnos</a>
+              <a class="collapse-item" href="/admin/grados">Grados</a>
+              <a class="collapse-item" href="/admin/matriculas">Matricula</a>
           </div>
       </div>
   </li>
@@ -67,13 +84,31 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registrarMatricula"
         aria-expanded="true" aria-controls="collapseUtilities">
         <i class="fas fa-fw fa-wrench"></i>
-        <span>Matricula</span>
+        <span>Docentes</span>
     </a>
     <div id="registrarMatricula" class="collapse" aria-labelledby="headingUtilities"
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Vistas:</h6>
-            <a class="collapse-item" href="/admin/matricula">Matricular</a>
+            <a class="collapse-item" href="/admin/docentes">Docentes</a>
+            <a class="collapse-item" href="/admin/asignaciones">Asignaciones</a>
+            <a class="collapse-item" href="/admin/materias">Cursos</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registrarNotas"
+        aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Calificaciones</span>
+    </a>
+    <div id="registrarNotas" class="collapse" aria-labelledby="headingUtilities"
+        data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Vistas:</h6>
+            <a class="collapse-item" href="/admin/notas">Notas</a>
+            <a class="collapse-item" href="/admin/periodos">Periodo Escolar</a>
         </div>
     </div>
 </li>
@@ -85,6 +120,8 @@
   <div class="sidebar-heading">
       Reportes
   </div>
+
+
 
 
 

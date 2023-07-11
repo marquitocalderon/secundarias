@@ -50,7 +50,7 @@
                                 <div class="col-12" style="margin-bottom: 1em;">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">
-                                        REGISTRAR USUARIOS
+                                        REGISTRAR PERIODOS
                                     </button>
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -59,12 +59,12 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar
-                                                        Usuarios</h1>
+                                                        Periodos</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="registroUsuario">
+                                                    <form id="registro">
                                                         <div class="form-group">
                                                             <label for="nombre">Nombre:</label>
                                                             <input type="text" class="form-control" id="nombre"
@@ -72,44 +72,29 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="usuario">Usuario:</label>
-                                                            <input type="text" class="form-control" id="usuario"
-                                                                name="usuario" required>
+                                                            <label for="telefono">fecha_inicio:</label>
+                                                            <input type="date" class="form-control"
+                                                                id="fecha_inicio" name="fecha_inicio"
+                                                                required>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="password">Password:</label>
-                                                            <input type="password" class="form-control" id="password"
-                                                                name="password" required>
+                                                            <label for="telefono">fecha_fin:</label>
+                                                            <input type="date" class="form-control"
+                                                                id="fecha_fin" name="fecha_fin"
+                                                                required>
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label for="rol">Rol:</label>
-                                                            <select class="form-select" id="rol2" name="rol" required>
-                                                                <% roles.forEach(function(rol) { if
-                                                                  (rol.nombre!=='SuperAdmin') { %>
-                                                                  <option value="<%= rol.id_rol %>">
-                                                                    <%= rol.nombre %> 
-                                                                  </option>
-                                                                  <% } }); %>
-                                                              </select>
-                                                        </div>
-
-                                                      
-                                                            <div class="form-group">
-                                                                <label for="rol">Colegio:</label>
-                                                                <select class="form-select" id="colegio2"
-                                                                    name="colegio">
-                                                                    <option value="<%= idcolegio %>">
-                                                                        <%= colegio %> - <%= distrito %>
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-                                                    
+                                     
 
                                                         <div class="form-group">
-                                                            <input type="hidden" class="form-control"
-                                                                id="estado_usuario" value="1" name="estado_usuario">
+                                                            <label for="rol">Colegio:</label>
+                                                            <select class="form-select" id="colegio"
+                                                                name="colegio">
+                                                                <option value="<%= idcolegio %>">
+                                                                    <%= colegio %> - <%= distrito %>
+                                                                </option>
+                                                            </select>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Registrar</button>
                                                     </form>
@@ -123,59 +108,35 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
                                                     <th>Nombre</th>
-                                                    <th>Usuario</th>
-                                                    <th>Rol</th>
-                                                    <th>Colegio</th>
-                                                    <th>Ciudad</th>
+                                                    <th>Fecha Inicio</th>
+                                                    <th>Fecha Fin</th>
+                                                    <th>COLEGIO</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% usuarios.forEach(usuario => {
-                                                    if (usuario.roles.nombre !== 'SuperAdmin' && usuario.colegio.nombre_colegio === colegio  && usuario.colegio.distrito.nombre_distrito === distrito) { %>
-                                                    <tr>
-                                                        <td>
-                                                            <%= usuario.id_usuario %>
+                                                <% periodos.forEach(periodo => {
+                                                    if ( periodo.colegio.nombre_colegio === colegio) { %>
+                                                      <tr>
+                                                          <td>
+                                                              <%= periodo.nombre %>
+                                                          </td>
+                                                          <td>
+                                                            <%= periodo.fecha_inicio %>
                                                         </td>
                                                         <td>
-                                                            <%= usuario.nombre %>
+                                                          <%= periodo.fecha_fin %>
+                                                      </td>
+                                                        <td>
+                                                            <%= colegio %> - <%= distrito %> 
                                                         </td>
                                                         <td>
-                                                            <%= usuario.usuario %>
-                                                        </td>
-                                                        <td>
-                                                            <%= usuario.roles.nombre %>
-                                                        </td>
-                                                        <td>
-                                                            <%= usuario.colegio.nombre_colegio %>
-                                                        </td>
-                                                        <td>
-                                                            <%= usuario.colegio.distrito.nombre_distrito %> , <%=
-                                                                    usuario.colegio.distrito.provincia.nombre_provincia
-                                                                    %>, <%=
-                                                                        usuario.colegio.distrito.provincia.departamento.nombre_departamento
-                                                                        %>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-success"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#exampleModalActualizacion"
-                                                                onclick="cargarDatosUsuario('<%= usuario.id_usuario %>', '<%= usuario.nombre %>', '<%= usuario.usuario %>','<%= usuario.password %>' ,'<%= usuario.roles.id_rol %>','<%= usuario.colegio.id_colegio %>' ,'<%= usuario.estado_usuario %>' ,)"
-                                                                title="Actualizar">
-                                                                <i class="bi bi-arrow-up-right-square-fill"></i>
-                                                            </button>
-
-                                                            <button type="button" class="btn btn-danger"
-                                                                onclick="confirmarEliminacion('<%= usuario.id_usuario %>','<%= usuario.estado_usuario %>')"
-                                                                title="Eliminar">
-                                                                Eliminar
-                                                            </button>
-                                                        </td>
-
-                                                    </tr>
-                                                    <% } }); %>   
+                                                          <button>Actualizar</button>
+                                                      </td>
+                                                        
+                                                      </tr>
+                                                  <% } }); %>                                                  
                                             </tbody>
                                         </table>
                                     </div>
@@ -215,30 +176,7 @@
                                                                     id="password2">
                                                             </div>
 
-                                                            <div class="form-group">
-                                                                <label for="rol">Rol:</label>
-                                                                <select class="form-select" id="roles" name="rol" required>
-                                                                    <% roles.forEach(function(rol) { if
-                                                                      (rol.nombre!=='SuperAdmin') { %>
-                                                                      <option value="<%= rol.id_rol %>">
-                                                                        <%= rol.nombre %> 
-                                                                      </option>
-                                                                      <% } }); %>
-                                                                  </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="rol">Colegio:</label>
-                                                                <div class="form-group">
-                                                                    <label for="rol">Colegio:</label>
-                                                                    <select class="form-select" id="colegio"
-                                                                        name="colegio">
-                                                                        <option value="<%= idcolegio %>">
-                                                                            <%= colegio %> - <%= distrito %>
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
+                                              
 
                                                             <div class="form-group">
                                                                 <input type="hidden" class="form-control"
@@ -265,28 +203,26 @@
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                         <script>
-                            document.getElementById('registroUsuario').addEventListener('submit', function (event) {
+                            document.getElementById('registro').addEventListener('submit', function (event) {
                                 event.preventDefault();
 
-                                var nombreUsuario = document.getElementById('nombre').value;
-                                var usuario = document.getElementById('usuario').value;
-                                var password = document.getElementById('password').value;
-                                var roles = document.getElementById('rol2').value;
-                                var colegio = document.getElementById('colegio2').value;
-                                var estado = document.getElementById('estado_usuario').value;
+                                var nombredelperiodo = document.getElementById('nombre').value;
+                                var fecha_inicio = document.getElementById('fecha_inicio').value;
+                                var fecha_fin = document.getElementById('fecha_fin').value;
+                                var colegio = document.getElementById('colegio').value;
 
                                 var enviarlosDatos = {
 
-                                    nombre: nombreUsuario,
-                                    usuario: usuario,
-                                    password: password,
-                                    rol: roles,
-                                    colegioUsuario: colegio,
-                                    estado_user: estado
+                                    nombre: nombredelperiodo,
+                                    fecha_inicio: fecha_inicio,
+                                    fecha_fin: fecha_fin,
+                                    colegio: {
+                                        id_colegio: colegio
+                                    },
                                 };
 
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.post('/admin/usuarios', enviarlosDatos)
+                                axios.post('http://ie.spring.informaticapp.com:8383/admin/periodos', enviarlosDatos)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({
@@ -310,14 +246,13 @@
                         </script>
 
                         <script>
-                            function cargarDatosUsuario(id, nombre, usuario, password, rol, colegio, estado) {
+                            function cargarDatosUsuario(id, nombre, usuario, password, rol, estado) {
                                 // Asignar los valores de los campos en el modal con los datos capturados por ID
                                 document.getElementById('idusuario').value = id;
                                 document.getElementById('nombre2').value = nombre;
                                 document.getElementById('usuario2').value = usuario;
                                 document.getElementById('password2').value = password;
                                 document.getElementById('roles').value = rol;
-                                document.getElementById('colegio').value = colegio;
                                 document.getElementById('estado_usuario2').value = estado;
                             }
 
@@ -329,19 +264,15 @@
                                 var usuario = document.getElementById('usuario2').value;
                                 var password = document.getElementById('password2').value;
                                 var rolusuario = document.getElementById('roles').value;
-                                var colegioUsuario = document.getElementById('colegio').value;
                                 var estado = document.getElementById('estado_usuario2').value;
 
                                 const datosParaActualizar = {
-                                    id_usuario: idusuario,
+                                    idusuario: idusuario,
                                     nombre: nombreusuario,
                                     usuario: usuario,
                                     password: password,
                                     roles: {
-                                        id_rol: rolusuario
-                                    },
-                                    colegio: {
-                                        id_colegio: colegioUsuario
+                                        idrol: rolusuario
                                     },
                                     estado_usuario: estado
                                 };
@@ -369,40 +300,6 @@
 
 
                             })
-                        </script>
-
-                        <script>
-                            function confirmarEliminacion(id) {
-                                Swal.fire({
-                                    title: 'Confirmar eliminación',
-                                    text: '¿Estás seguro de que deseas eliminar este elemento?',
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#3085d6',
-                                    cancelButtonColor: '#d33',
-                                    confirmButtonText: 'Eliminar',
-                                    cancelButtonText: 'Cancelar'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        // Realizar solicitud DELETE con Axios
-                                        axios.delete('http://ie.spring.informaticapp.com:11122/admin/usuarios/' + id)
-                                            .then(response => {
-                                                // Redireccionar u realizar cualquier acción adicional después de eliminar
-                                                location.reload();
-                                            })
-                                            .catch(error => {
-                                                console.error(error);
-                                                // Mostrar mensaje de error si la solicitud falla
-                                                Swal.fire({
-                                                    icon: 'error',
-                                                    title: 'Error',
-                                                    text: 'No se pudo eliminar el elemento.'
-                                                });
-                                            });
-                                    }
-                                });
-                            }
-
                         </script>
 
                 </div>

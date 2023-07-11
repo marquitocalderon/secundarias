@@ -65,9 +65,9 @@
                       </thead>
                       <tbody>
                         <% asignacionDocente.forEach(asignacion => {
-                          if (asignacion.colegio.nombre_colegio === colegio && asignacion.docente.correo === correo ) {
+                          if (asignacion.colegio.nombre_colegio === colegio && asignacion.docente.correo === correo && asignacion.colegio.distrito.nombre_distrito === distrito  ) {
                             alumnos.forEach(alumno => {
-                              if (alumno.colegio.nombre_colegio === asignacion.colegio.nombre_colegio &&
+                              if (alumno.colegio.nombre_colegio === asignacion.colegio.nombre_colegio && alumno.colegio.distrito.nombre_distrito === asignacion.colegio.distrito.nombre_distrito &&
                                 alumno.grado.nombre === asignacion.grado.nombre) { %>
                                 <tr>
                                   <td>

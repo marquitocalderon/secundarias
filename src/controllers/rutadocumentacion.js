@@ -84,4 +84,6 @@ const vistaDocumentacionPeriodo= async (req, res) => {
 
 
 
-module.exports = { vistaDocumentacion , vistaDocumentacionUusuarios,vistaToken , vistaDocumentacionRoles, vistaDocumentacionDepartamentos, vistaDocumentacionProvincia, vistaDocumentacionDistrito, vistaDocumentacionColegio, vistaDocumentacionAlumno, vistaDocumentacionGrado, vistaDocumentacionSecciones, vistaDocumentacionMatricula, vistaDocumentacionDocente, vistaDocumentacionAsignaciones, vistaDocumentacionCursos, vistaDocumentacionNotas, vistaDocumentacionPeriodo};
+
+
+module.exports = { vistaDocumentacion , vistaDocumentacionUusuarios,vistaToken , vistaDocumentacionRoles, vistaDocumentacionDepartamentos, vistaDocumentacionProvincia, vistaDocumentacionDistrito, vistaDocumentacionColegio, vistaDocumentacionAlumno, vistaDocumentacionGrado, vistaDocumentacionSecciones, vistaDocumentacionMatricula, vistaDocumentacionDocente, vistaDocumentacionAsignaciones, vistaDocumentacionCursos, vistaDocumentacionNotas, vistaDocumentacionPeriodo };

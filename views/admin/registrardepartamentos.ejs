@@ -45,30 +45,22 @@
 
             <!-- ********* ESCRIBIR AQUI DENTRO CONTAINER FLUILD ESCRIBE LO QUE SALDRA EN EL MEDIO-->
             <div class="container-fluid">
+
               <div class="row">
                 <div class="col-12" style="margin-bottom: 1em;">
-                  <form id="registroDistritos">
-                    <div class="form-group">
-                      <label for="nombre">Distrito:</label>
-                      <input type="text" class="form-control" id="distrito" name="Distrito"
-                        placeholder="Ingrese el nombre del distrito">
-                    </div>
 
+                  <form id="registroDepartamentos">
                     <div class="form-group">
-                      <label for="rol">Provincia:</label>
-                      <select class="form-select" id="provincia" name="provincia">
-                        <% vistaprovincias.forEach(function(provincia) { %>
-                          <option value="<%= provincia.id_provincia %>">
-                            <%= provincia.nombre_provincia %>
-                          </option>
-                          <% }); %>
-                      </select>
+                      <label for="nombre">Departamento:</label>
+                      <input type="text" class="form-control" id="Departamento" name="Departamento"
+                        placeholder="Ingrese el nombre del departamento">
                     </div>
                     <div class="form-group">
                       <input type="hidden" class="form-control" id="estado" value="1" name="estado">
                     </div>
                     <button type="submit" class="btn btn-primary">Registrar</button>
                   </form>
+
                 </div>
                 <div class="col-12">
                   <div class="table-responsive">
@@ -76,35 +68,34 @@
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>Distrito</th>
+                          <th>Departamento</th>
                           <th>Estado</th>
+                          <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <% vistadistritos.forEach(distritos=> { %>
+                        <% vistadepartamentos.forEach(departamentos=> { %>
                           <tr>
                             <td>
-                              <%= distritos.id_distrito %>
+                              <%= departamentos.id_departamento %>
                             </td>
                             <td>
-                              <%= distritos.nombre_distrito %>
+                              <%= departamentos.nombre_departamento %>
                             </td>
                             <td>
-                              <%= distritos.estado %>
+                              <%= departamentos.estado %>
                             </td>
-                            <td style="display: flex; gap: 5px;">
+                            <td>
                               <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalActualizacion" onclick="cargarDatos( 
-                                    '<%= distritos.id_distrito %>',
-                                    '<%= distritos.nombre_distrito%>',
-                                    '<%= distritos.provincia.id_provincia%>',
-                                    '<%= distritos.estado %>',
-                                    )" title="Actualizar">
+                                data-bs-target="#exampleActualizar"
+                                onclick="cargarDatos('<%= departamentos.id_departamento %>', '<%= departamentos.nombre_departamento %>','<%= departamentos.estado %>' )"
+                                title="Actualizar">
                                 <i class="bi bi-arrow-up-right-square-fill"></i>
                               </button>
+
                               <button type="button" class="btn btn-danger"
-                                onclick="confirmarEliminacion('<%= distritos.id_distrito %>')" title="Eliminar">
-                                <i class="bi bi-trash-fill"></i>
+                                onclick="confirmarEliminacion('<%= departamentos.id_departamento %>')" title="Eliminar">
+                                Eliminar
                               </button>
                             </td>
                           </tr>
@@ -113,41 +104,34 @@
                     </table>
                   </div>
 
-                  <div class="modalacutalizacionusuarios">
+                  <div class="modalacutalizacion">
                     <!-- Modal de actualización -->
-                    <div class="modal fade" id="exampleModalActualizacion" tabindex="-1"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleActualizar" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Actualizar
-                              Distrito</h5>
+                              Departamento</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                            <!-- Aquí puedes agregar los campos de actualización del usuario -->
-                            <form id="Actualizar">
+                            <!-- Aquí puedes agregar los campos de actualización del departamentos -->
+                            <form id="actualizacionDepartamentos">
                               <div class="form-group">
-                                <input type="hidden" name="id_distrito" id="id_distrito">
-                                <label for="nombre">Distrito:</label>
-                                <input type="text" class="form-control" id="distrito2" name="Distrito"
-                                  placeholder="Ingrese el nombre del distrito">
-                              </div>
-          
-                              <div class="form-group">
-                                <label for="rol">Provincia:</label>
-                                <select class="form-select" id="provincia2" name="provincia">
-                                  <% vistaprovincias.forEach(function(provincia) { %>
-                                    <option value="<%= provincia.id_provincia %>">
-                                      <%= provincia.nombre_provincia %>
-                                    </option>
-                                    <% }); %>
-                                </select>
+                                <label for="nombre">ID Departamento:</label>
+                                <input type="text" class="form-control" id="idDepartamento1" name="idDepartamento1"
+                                  placeholder="Ingrese el nombre del departamento">
                               </div>
                               <div class="form-group">
-                                <input type="hidden" class="form-control" id="estado2" value="1" name="estado">
+                                <label for="nombre">Departamento:</label>
+                                <input type="text" class="form-control" id="Departamento1" name="Departamento1"
+                                  placeholder="Ingrese el nombre del departamento">
                               </div>
-                              <button type="submit" class="btn btn-primary">Registrar</button>
+                              <div class="form-group">
+                                <input type="hidden" class="form-control" id="estado1" value="1" name="estado1">
+                              </div>
+                              <button type="submit" class="btn btn-primary">Actualizar</button>
                             </form>
                           </div>
                         </div>
@@ -165,24 +149,20 @@
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
-              document.getElementById('registroDistritos').addEventListener('submit', function (event) {
+              document.getElementById('registroDepartamentos').addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                var distrito = document.getElementById('distrito').value;
+                var departamento = document.getElementById('Departamento').value;
                 var estado = document.getElementById('estado').value;
-                var provincia = document.getElementById('provincia').value;
-
 
                 var enviarlosDatos = {
-                  nombre_distrito: distrito,
-                  provincia: {
-                    id_provincia: provincia,
-                  },
+
+                  nombre_departamento: departamento,
                   estado: estado
                 };
 
                 // Realizar la solicitud POST utilizando Axios
-                axios.post('http://ie.spring.informaticapp.com:8383/admin/distritos', enviarlosDatos)
+                axios.post('http://ie.spring.informaticapp.com:8383/admin/departamentos', enviarlosDatos)
                   .then(function (response) {
                     // Mostrar una notificación SweetAlert exitosa
                     Swal.fire({
@@ -204,34 +184,29 @@
                   });
               });
             </script>
-
+            <!-- ESTO ES EL PUT SU SCRYPT -->
             <script>
-              function cargarDatos(id, distrito, provincia, estado) {
+              function cargarDatos(id, departamento, estado) {
                 // Asignar los valores de los campos en el modal con los datos capturados por ID
-                document.getElementById('id_distrito').value = id;
-                document.getElementById('distrito2').value = distrito;
-                document.getElementById('provincia2').value = provincia;
-                document.getElementById('estado2').value = estado;
+                document.getElementById('idDepartamento1').value = id;
+                document.getElementById('Departamento1').value = departamento;
+                document.getElementById('estado1').value = estado;
               }
 
-              document.getElementById('Actualizar').addEventListener('submit', function (event) {
+              document.getElementById('actualizacionDepartamentos').addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                var iddistrito = document.getElementById('id_distrito').value;
-                var distrito2 = document.getElementById('distrito2').value;
-                var provincia2 = document.getElementById('provincia2').value;
-                var estado = document.getElementById('estado2').value;
+                var iddepartamento = document.getElementById('idDepartamento1').value;
+                var nombre_provincia = document.getElementById('Departamento1').value;
+                var estado = document.getElementById('estado1').value;
 
                 const datosParaActualizar = {
-                  id_distrito: iddistrito,
-                  nombre_distrito: distrito2,
-                  provincia: {
-                    id_provincia: provincia2,
-                  },
+                  id_departamento: iddepartamento,
+                  nombre_departamento: nombre_provincia,
                   estado: estado
                 };
-                // Realizar la solicitud POST utilizando Axios
-                axios.put('http://ie.spring.informaticapp.com:8383/admin/distritos', datosParaActualizar)
+                // Realizar la solicitud PUST utilizando Axios
+                axios.put('http://ie.spring.informaticapp.com:8383/admin/departamentos', datosParaActualizar)
                   .then(function (response) {
                     // Mostrar una notificación SweetAlert exitosa
                     Swal.fire({
@@ -253,9 +228,9 @@
                   });
               })
             </script>
-
+            <!-- ESTO ES EL Delete SU SCRYPT -->
             <script>
-              function confirmarEliminacion(id) {
+              function confirmarEliminacion(idDepartamento) {
                 Swal.fire({
                   title: 'Confirmar eliminación',
                   text: '¿Estás seguro de que deseas eliminar este elemento?',
@@ -268,7 +243,7 @@
                 }).then((result) => {
                   if (result.isConfirmed) {
                     // Realizar solicitud DELETE con Axios
-                    axios.delete('http://ie.spring.informaticapp.com:8383/admin/distritos/' + id)
+                    axios.delete('http://ie.spring.informaticapp.com:8383/admin/departamentos/' + idDepartamento)
                       .then(response => {
                         // Redireccionar u realizar cualquier acción adicional después de eliminar
                         location.reload();

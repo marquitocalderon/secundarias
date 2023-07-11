@@ -4,9 +4,9 @@ const axios = require("axios");
 const bcrypt = require('bcryptjs');
 const session = require("express-session");
 const { vistaDocente, vistaDocenteAsignacionCursoAlumno } = require("../controllers/Docente/getdocente");
-const { vistaAdmin, vistaRegistrarUsuario, vistaRegistrarAlumnos } = require("../controllers/admin/getadmin");
+const { vistaAdmin, vistaRegistrarUsuario, vistaRegistrarAlumnos, vistaAdminRegistrarColegios, vistaAdminRegistrarAlumnos, vistaAdminRegistrarDocentes, vistaAdminRegistrarAsignacion, vistaAdminRegistrarCursos, vistasAdmingrados, vistaAdminRegistrarPeriodos, vistaAdminRegistrarMatricula, vistaAdminRegistrarDepartamentos, vistaAdminRegistrarProvincias, vistaAdminRegistrarDistritos } = require("../controllers/admin/getadmin");
 const { vistasuper, vistaSuperRegistrarUsuario, vistaSuperRegistrarRoles, vistaSuperRegistrarColegios, vistaSuperRegistrarAlumnos, vistaSuperRegistrarDocentes, vistaSuperRegistrarAsignacion, vistasuperRegistrarCursos, vistasupergrados, vistasuperRegistrarPeriodos, vistaRegistrarDepartamentos, vistaRegistrarProvincias, vistaRegistrarDistritos, vistaRegistrarMatricula } = require("../controllers/superadmin/getsuper");
-const { vistaDocumentacion, vistaDocumentacionUusuarios, vistaToken, vistaDocumentacionRoles, vistaDocumentacionDepartamentos, vistaDocumentacionProvincia, vistaDocumentacionDistrito, vistaDocumentacionColegio, vistaDocumentacionAlumno, vistaDocumentacionGrado, vistaDocumentacionSecciones, vistaDocumentacionMatricula, vistaDocumentacionDocente, vistaDocumentacionAsignaciones, vistaDocumentacionCursos, vistaDocumentacionNotas, vistaDocumentacionPeriodo } = require("../controllers/rutadocumentacion");
+const { vistaDocumentacion, vistaDocumentacionUusuarios, vistaToken, vistaDocumentacionRoles, vistaDocumentacionDepartamentos, vistaDocumentacionProvincia, vistaDocumentacionDistrito, vistaDocumentacionColegio, vistaDocumentacionAlumno, vistaDocumentacionGrado, vistaDocumentacionSecciones, vistaDocumentacionMatricula, vistaDocumentacionDocente, vistaDocumentacionAsignaciones, vistaDocumentacionCursos, vistaDocumentacionNotas, vistaDocumentacionPeriodo, postToken } = require("../controllers/rutadocumentacion");
 const { postUsuarios } = require("../controllers/superadmin/postsuperadmin");
 
 
@@ -151,9 +151,9 @@ router.get("/super/matriculas", protectRoute, vistaRegistrarMatricula);
 
 
 
-router.get("/super/departamentos", vistaRegistrarDepartamentos);
-router.get("/super/provincias", vistaRegistrarProvincias );
-router.get("/super/distritos", vistaRegistrarDistritos );
+router.get("/super/departamentos", protectRoute, vistaRegistrarDepartamentos);
+router.get("/super/provincias", protectRoute, vistaRegistrarProvincias );
+router.get("/super/distritos", protectRoute, vistaRegistrarDistritos );
 
 
 
@@ -171,9 +171,23 @@ router.get("/docente/alumnos", protectRoute, vistaDocenteAsignacionCursoAlumno);
 
 router.get("/admin", protectRoute, vistaAdmin);
 router.get("/admin/usuarios", protectRoute, vistaRegistrarUsuario);
-router.get("/admin/alumnos", protectRoute, vistaRegistrarAlumnos);
+router.post("/admin/usuarios", postUsuarios);
+router.get("/admin/alumnos", protectRoute, vistaAdminRegistrarAlumnos);
+
+router.get("/admin/colegios", protectRoute, vistaAdminRegistrarColegios);
+router.get("/admin/alumnos", protectRoute, vistaAdminRegistrarAlumnos);
+router.get("/admin/docentes", protectRoute, vistaAdminRegistrarDocentes);
+router.get("/admin/asignaciones", protectRoute, vistaAdminRegistrarAsignacion);
+router.get("/admin/materias", protectRoute, vistaAdminRegistrarCursos);
+router.get("/admin/grados", protectRoute, vistasAdmingrados);
+router.get("/admin/periodos", protectRoute, vistaAdminRegistrarPeriodos);
+router.get("/admin/matriculas", protectRoute, vistaAdminRegistrarMatricula);
 
 
+
+router.get("/admin/departamentos", protectRoute, vistaAdminRegistrarDepartamentos);
+router.get("/admin/provincias", protectRoute, vistaAdminRegistrarProvincias );
+router.get("/admin/distritos", protectRoute, vistaAdminRegistrarDistritos );
 
 
 
@@ -182,7 +196,12 @@ router.get("/admin/alumnos", protectRoute, vistaRegistrarAlumnos);
 // DOCUMENTACION DEL SISTEMA
 router.get("/documentacion", vistaDocumentacion);
 router.get("/documentacion/usuarios", vistaDocumentacionUusuarios);
+
 router.get("/tokensecundaria", vistaToken);
+
+
+
+
 
 router.get("/documentacion/roles", vistaDocumentacionRoles);
 router.get("/documentacion/departamentos", vistaDocumentacionDepartamentos);
