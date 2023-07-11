@@ -7,7 +7,7 @@ const { vistaDocente, vistaDocenteAsignacionCursoAlumno } = require("../controll
 const { vistaAdmin, vistaRegistrarUsuario, vistaRegistrarAlumnos, vistaAdminRegistrarColegios, vistaAdminRegistrarAlumnos, vistaAdminRegistrarDocentes, vistaAdminRegistrarAsignacion, vistaAdminRegistrarCursos, vistasAdmingrados, vistaAdminRegistrarPeriodos, vistaAdminRegistrarMatricula, vistaAdminRegistrarDepartamentos, vistaAdminRegistrarProvincias, vistaAdminRegistrarDistritos } = require("../controllers/admin/getadmin");
 const { vistasuper, vistaSuperRegistrarUsuario, vistaSuperRegistrarRoles, vistaSuperRegistrarColegios, vistaSuperRegistrarAlumnos, vistaSuperRegistrarDocentes, vistaSuperRegistrarAsignacion, vistasuperRegistrarCursos, vistasupergrados, vistasuperRegistrarPeriodos, vistaRegistrarDepartamentos, vistaRegistrarProvincias, vistaRegistrarDistritos, vistaRegistrarMatricula } = require("../controllers/superadmin/getsuper");
 const { vistaDocumentacion, vistaDocumentacionUusuarios, vistaToken, vistaDocumentacionRoles, vistaDocumentacionDepartamentos, vistaDocumentacionProvincia, vistaDocumentacionDistrito, vistaDocumentacionColegio, vistaDocumentacionAlumno, vistaDocumentacionGrado, vistaDocumentacionSecciones, vistaDocumentacionMatricula, vistaDocumentacionDocente, vistaDocumentacionAsignaciones, vistaDocumentacionCursos, vistaDocumentacionNotas, vistaDocumentacionPeriodo, postToken } = require("../controllers/rutadocumentacion");
-const { postUsuarios } = require("../controllers/superadmin/postsuperadmin");
+const { postUsuarios, postPeriodos } = require("../controllers/superadmin/postsuperadmin");
 
 
 
@@ -149,7 +149,7 @@ router.get("/super/grados", protectRoute, vistasupergrados);
 router.get("/super/periodos", protectRoute, vistasuperRegistrarPeriodos);
 router.get("/super/matriculas", protectRoute, vistaRegistrarMatricula);
 
-
+router.post("/super/periodos", postPeriodos);
 
 router.get("/super/departamentos", protectRoute, vistaRegistrarDepartamentos);
 router.get("/super/provincias", protectRoute, vistaRegistrarProvincias );

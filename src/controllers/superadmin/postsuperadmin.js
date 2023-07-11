@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const postUsuarios = async (req, res) => {
   try {
     // Obtener los datos del cuerpo de la solicitud
-    const { nombre, usuario, password, rol , colegioUsuario , estado_user } = req.body;
+    const { nombre, usuario, password, rol, colegioUsuario, estado_user } = req.body;
 
     // Encriptar el password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,4 +30,30 @@ const postUsuarios = async (req, res) => {
   }
 };
 
-module.exports = { postUsuarios};
+
+const postPeriodos = async (req, res) => {
+  try {
+    // Obtener los datos del cuerpo de la solicitud
+    const { nombre, fecha_inicio, fecha_fin, colegio } = req.body;
+
+
+
+    // Realizar solicitud POST para crear el usuario
+    const response = await axios.post('http://ie.spring.informaticapp.com:8383/admin/periodos', {
+      nombre,
+      fecha_inicio,
+      fecha_fin,
+      colegio: {
+        id_colegio: colegio
+      }
+    }
+    );
+    // Enviar respuesta con estado 200
+    res.status(200).send('Usuarios creados exitosamente');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al enviar los usuarios');
+  }
+};
+
+module.exports = { postUsuarios , postPeriodos};

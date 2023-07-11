@@ -78,14 +78,22 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
+
+    // AQUI CONFIGURAMOS UNA VEZ QUE EL USUARIO HAYA APRETADO EL BOTON SOLICITAR DEL LA VISTA
+
+// SUBMIT VENDRIA HACER CUANDO TOKEN EL USUARIO EL BOTON DE ENVIAR Y LUEGO YA HACEMOS LOS DEMAS PASOS DE ABAJO
+
     document.getElementById('generartoken').addEventListener('submit', function (event) {
       event.preventDefault();
 
+      // ESTOS SON LAS VARIABLES QUE ESCRIBE EL USUARIO EN LA VISTA O EN LOS INPUTS 
       var nombresToken = document.getElementById('nombre').value;
       var apellidosToken = document.getElementById('apellidos').value;
       var emailToken = document.getElementById('email').value;
 
 
+
+      // ACA CREAMOS LA VARIABLE PARA ENVIAR LOS DATOS AL SERVIDOR
       var enviarlosDatos = {
 
         nombres: nombresToken,
@@ -96,6 +104,7 @@
         estado: 1
       };
 
+      // LUEGO HACEMOS LA SOCILITUD POST PARA ENVIAR LOS DATOS, ESTAMOS USANDO LIBRERIA PARA HACER LAS PETICIONES GET , POST PUT , Y DELETE EN ESTE TRABAJO
       // Realizar la solicitud POST utilizando Axios
       axios.post('http://ie.spring.informaticapp.com:8383/admin/token', enviarlosDatos)
         .then(function (response) {
@@ -103,9 +112,11 @@
           Swal.fire({
             title: 'Éxito',
             text: 'Se Solicito Correctamente su TOKEN',
-            icon: 'success'
+            icon: 'success' 
           }).then(function () {
 
+            // DESPUES QUE SE HAYA REALIZADO CON EXITO EL ENVIO AL SERVIDOR ACA VA A IMPRIMIR LOS DATOS QUE QUEREMOS QUE SERIA  cliente_id Y llave_Secreta
+            
             document.getElementById("generartoken").reset();
             document.getElementById('resultadoUsuario').innerHTML = 'Usuario: <strong>' + response.data.cliente_id + '</strong>';
             document.getElementById('resultadoClave').innerHTML = 'Llave secreta: <strong>' + response.data.llave_secreta + '</strong>';

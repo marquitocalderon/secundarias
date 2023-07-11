@@ -216,13 +216,11 @@
                                     nombre: nombredelperiodo,
                                     fecha_inicio: fecha_inicio,
                                     fecha_fin: fecha_fin,
-                                    colegio: {
-                                        id_colegio: colegio
-                                    },
+                                    colegio: colegio,
                                 };
 
                                 // Realizar la solicitud POST utilizando Axios
-                                axios.post('http://ie.spring.informaticapp.com:8383/admin/periodos', enviarlosDatos)
+                                axios.post('/super/periodos', enviarlosDatos)
                                     .then(function (response) {
                                         // Mostrar una notificación SweetAlert exitosa
                                         Swal.fire({
