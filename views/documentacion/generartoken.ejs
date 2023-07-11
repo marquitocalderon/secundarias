@@ -41,30 +41,17 @@
               <form class="user" id="generartoken">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="nombre" placeholder="Nombres">
+                    <input type="text" class="form-control form-control-user" id="nombre" placeholder="Nombres" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="apellidos" placeholder="Apellidos">
+                    <input type="text" class="form-control form-control-user" id="apellidos" placeholder="Apellidos" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <input type="email" class="form-control form-control-user" id="email"
-                    placeholder="Correo Electronico">
+                    placeholder="Correo Electronico" required>
                 </div>
-                <div class="form-group row">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="hidden" class="form-control form-control-user" id="cliente_id" value=""
-                      placeholder="cliente_id">
-                  </div>
-                  <div class="col-sm-6">
-                    <input type="hidden" class="form-control form-control-user" id="llave_secreta" value=""
-                      placeholder="llave_secreta">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input type="hidden" value="1" class="form-control form-control-user" id="estado"
-                    placeholder=" estado">
-                </div>
+    
                 <button type="submit" class="btn btn-primary btn-user btn-block">
                   Solicitar
                 </button>
@@ -97,18 +84,16 @@
       var nombresToken = document.getElementById('nombre').value;
       var apellidosToken = document.getElementById('apellidos').value;
       var emailToken = document.getElementById('email').value;
-      var clienteToken = document.getElementById('cliente_id').value;
-      var llaveToken = document.getElementById('llave_secreta').value;
-      var estadoToken = document.getElementById('estado').value;
+
 
       var enviarlosDatos = {
 
         nombres: nombresToken,
         apellidos: apellidosToken,
         email: emailToken,
-        cliente_id: clienteToken,
-        llave_secreta: llaveToken,
-        estado: estadoToken
+        cliente_id: "",
+        llave_secreta: "",
+        estado: 1
       };
 
       // Realizar la solicitud POST utilizando Axios
