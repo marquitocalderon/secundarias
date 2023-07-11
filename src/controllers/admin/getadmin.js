@@ -43,6 +43,8 @@ const vistaAdminRegistrarColegios = async (req, res) => {
     const userId = req.userId;
     const roles2 = req.userroles;
     const colegio = req.userColegio;
+    const distrito = req.userDistrito;
+    const idcolegio = req.userIdColegio;
 
     const response = await axios.get("http://ie.spring.informaticapp.com:8383/admin/colegios");
     const vistacolegios = response.data;
@@ -50,7 +52,7 @@ const vistaAdminRegistrarColegios = async (req, res) => {
     const responsedistritos = await axios.get("http://ie.spring.informaticapp.com:8383/admin/distritos");
     const vistadistritos = responsedistritos.data;// Suponiendo que la respuesta contiene los datos de los roles
 
-    res.render("admin/colegios", { vistacolegios , vistadistritos,  userId, roles2 , colegio}); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
+    res.render("admin/colegios", { vistacolegios , vistadistritos,  userId, roles2 ,colegio, distrito , idcolegio}); // Renderiza la vista "roles" pasando los datos de los roles a través del objeto
 
   } catch (error) {
     res.render("admin/colegios"); // Renderiza una vista de error en caso de que ocurra un problema con la solicitud

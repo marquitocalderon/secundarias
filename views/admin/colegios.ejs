@@ -133,7 +133,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% vistacolegios.forEach(colegio=> { %>
+                                                <% vistacolegios.forEach(colegio=> {
+                                                    if (colegio.id_colegio === idcolegio && colegio.distrito.nombre_distrito === distrito) { %>
                                                     <tr>
                                                         <td>
                                                             <%= colegio.id_colegio %>
@@ -156,6 +157,7 @@
                                                         <td>
                                                             <%= colegio.tipo_institucion %>
                                                         </td>
+                                                      
 
                                                         <td>
                                                             <button type="button" class="btn btn-success"
@@ -181,7 +183,7 @@
                                                         </td>
 
                                                     </tr>
-                                                    <% }); %>
+                                                    <% } }); %>
                                             </tbody>
                                         </table>
                                     </div>
